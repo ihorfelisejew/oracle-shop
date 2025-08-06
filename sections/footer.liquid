@@ -2,81 +2,21 @@
 	<div class="footer-top">
 		<div class="footer-top__container">
 			<div class="footer-top__content">
-				<ul class="footer__links-list footer__categories">
-					<li class="column__title">
-						Jewelry
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Rings
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Bracelets
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Earrings
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Necklaces
-						</a>
-					</li>
-				</ul>
-				<ul class="footer__links-list footer__collections">
-					<li class="column__title">
-						Collections
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Bondi
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							India
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Lake
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							First Love
-						</a>
-					</li>
-				</ul>
-				<ul class="footer__links-list footer__pages">
-					<li class="column__title">
-						Company
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Blog
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Contacts
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							FAQ
-						</a>
-					</li>
-					<li class="footer__list-item">
-						<a href="#" class="footer__item-link">
-							Privacy Policy
-						</a>
-					</li>
-				</ul>
+				{% for link in linklists.footer.links %}
+					{% assign link_handle = link.title | handleize %}
+					<ul class="footer__links-list footer__{{ link_handle }}">
+						<li class="column__title">
+							{{ link.title }}
+						</li>
+						{% for child_link in link.links %}
+							<li class="footer__list-item">
+								<a href="{{ child_link.url }}" class="footer__item-link">
+									{{ child_link.title }}
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endfor %}
 				<div class="footer__social">
 					<h4 class="column__title">
 						Follow Us
