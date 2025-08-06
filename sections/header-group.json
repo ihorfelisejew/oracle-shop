@@ -15,7 +15,7 @@
       "type": "header",
       "settings": {
         "shipping_notice_text": "Free worldwide shipping for orders over $200",
-        "shipping_notice_bg": "#994c4c",
+        "shipping_notice_bg": "#000000",
         "shipping_notice_text_color": "#ffffff"
       }
     }
