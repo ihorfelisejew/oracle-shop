@@ -12,9 +12,26 @@
     "main": {
       "type": "template-404",
       "settings": {}
+    },
+    "main_first_screen_slider_9VmVmh": {
+      "type": "main_first-screen_slider",
+      "blocks": {
+        "slide_ENbeWy": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/main_first-screen-bg.png"
+          }
+        }
+      },
+      "block_order": [
+        "slide_ENbeWy"
+      ],
+      "name": "First Screen Slider",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "main_first_screen_slider_9VmVmh"
   ]
 }
