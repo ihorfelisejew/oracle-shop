@@ -2,24 +2,7 @@
   <div class="popular-goods__container">
     <h2 class="popular-goods__title title">Popular Items</h2>
     <div class="popular-goods__list">
-      {% for product in collections.all.products | sort_by: 'best-selling' | limit: 4 %}
-        <div class="product__item">
-          <a href="{{ product.url }}" class="image__block">
-            {% if product.tags contains 'New' %}
-              <span class="product__label">New</span>
-            {% endif %}
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-            <span class="view-more">View More</span>
-          </a>
-          <a href="{{ product.url }}" class="product__name">{{ product.title }}</a>
-          <p class="product__price">
-            {{ product.price | money }}
-            {% if product.compare_at_price > product.price %}
-              <span class="old-price">{{ product.compare_at_price | money }}</span>
-            {% endif %}
-          </p>
-        </div>
-      {% endfor %}
+      
     </div>
     <div class="popular-goods__more-container">
       <a href="/collections/all" class="popular-goods__more link">Show More</a>
