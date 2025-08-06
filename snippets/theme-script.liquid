@@ -1,108 +1,13 @@
-{% comment %}
-<script>
-    function loadSwiperScript() {
-        var swiper = document.createElement('script');
-        swiper.setAttribute('src',`https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js`);
-        document.body.appendChild(swiper);
-    }
-    function loadTomSelectScript() {
-        var tomSelect = document.createElement('script');
-        tomSelect.setAttribute('src',`https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.js`);
-        document.body.appendChild(tomSelect);
-    }
-    function loadFancyboxScript() {
-        var fancybox = document.createElement('script');
-        fancybox.setAttribute('src',`https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`);
-        document.body.appendChild(fancybox);
-    }
-    function loadAppScript() {
-        setTimeout(function (){
-            var appJS = document.createElement('script');
-            appJS.setAttribute('src',`{{ 'app.min.js' | asset_url }}?${Math.random()}`);
-            appJS.setAttribute("defer", "defer");
-            document.body.appendChild(appJS);
-        },100)
-    }
-    function loadThemeScript() {
-        setTimeout(function (){
-            var themeJS = document.createElement('script');
-            themeJS.setAttribute('src',`{{ 'theme.js' | asset_url }}?${Math.random()}`);
-            themeJS.setAttribute("defer", "defer");
-            document.body.appendChild(themeJS);
-        },200)
-    }
-    function loadPredictiveSearchScript() {
-        setTimeout(function (){
-            var predictiveSearchJS = document.createElement('script');
-            predictiveSearchJS.setAttribute('src',`{{ 'predictive-search.js' | asset_url }}`);
-            predictiveSearchJS.setAttribute("defer", "defer");
-            document.body.appendChild(predictiveSearchJS);
-        },200)
-    }
-    function loadProductRecommendationScript() {
-        setTimeout(function (){
-            var productRecommendationJS = document.createElement('script');
-            productRecommendationJS.setAttribute('src',`{{ 'product-recommendation.js' | asset_url }}`);
-            productRecommendationJS.setAttribute("defer", "defer");
-            document.body.appendChild(productRecommendationJS);
-        },200)
-    }
-
-    function setVideoFrames() {
-
-
-    }
-    function _loadDelayedScripts() {
-        var loaded = false;
-        const timeoutScript = setTimeout(function (){
-            loadSwiperScript();
-            loadTomSelectScript();
-            loadFancyboxScript();
-            loadAppScript();
-            loadThemeScript();
-            loadPredictiveSearchScript();
-            {% if template.name == 'product' %}
-            loadProductRecommendationScript();
-            {% endif %}
-            setVideoFrames();
-            document.body.removeEventListener('mousemove', loadScriptsOnInteraction);
-            document.body.removeEventListener('touchstart', loadScriptsOnInteraction);
-            document.body.removeEventListener('click', loadScriptsOnInteraction);
-        }, 1000);
-        function loadScriptsOnInteraction() {
-            if (loaded) {
-                return;
-            }
-            document.body.removeEventListener('mousemove', loadScriptsOnInteraction);
-            document.body.removeEventListener('touchstart', loadScriptsOnInteraction);
-            document.body.removeEventListener('click', loadScriptsOnInteraction);
-            loaded = true;
-
-            loadSwiperScript();
-            loadTomSelectScript();
-            loadFancyboxScript();
-            loadAppScript();
-            loadThemeScript();
-            loadPredictiveSearchScript();
-            {% if template.name == 'product' %}
-            loadProductRecommendationScript();
-            {% endif %}
-            setVideoFrames();
-            const eventLoad = new Event('document-action');
-            document.dispatchEvent(eventLoad);
-            clearTimeout(timeoutScript);
-        }
-        document.body.addEventListener('mousemove', loadScriptsOnInteraction);
-        document.body.addEventListener('touchstart', loadScriptsOnInteraction);
-        document.body.addEventListener('click', loadScriptsOnInteraction);
-    }
-    setTimeout(function (){
-        _loadDelayedScripts();
-    }, 200)
-</script>
-{% endcomment %}
 {% if settings.enable_lazy_load %}
     <script src="{{ 'lazy-load.js' | asset_url }}"></script>
 {% endif %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ 'app.js' | asset_url }}"></script>
+<script src="{{ 'header-scrolled.js' | asset_url }}"></script>
+<script src="{{ 'footer-dropdowns.js' | asset_url }}"></script>
+<script src="{{ 'main_gift-card-dropdown.js' | asset_url }}"></script>
+<script src="{{ 'main_play-promo.js' | asset_url }}"></script>
+<script src="{{ 'main_blog-slider.js' | asset_url }}"></script>
+<script src="{{ 'main_first-screen-slider.js' | asset_url }}"></script>
 <script src="{{ 'theme.js' | asset_url }}"></script>
 
