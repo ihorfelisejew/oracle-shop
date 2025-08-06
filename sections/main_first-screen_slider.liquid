@@ -1,17 +1,14 @@
-<div class="first-screen__bg swiper">
-	{% if section.blocks.size > 0 %}
-		<div class="swiper-wrapper">
-			{% for block in section.blocks %}
-				{% if block.settings.image %}
-					<div class="swiper-slide first-screen__slide">
-						<img src="{{ block.settings.image | img_url: 'master' }}" alt="oracle - jewelry">
-					</div>
-				{% endif %}
-			{% endfor %}
-		</div>
-	{% endif %}
-</div>
-
+{% if section.blocks.size > 0 %}
+	<div class="swiper-wrapper">
+		{% for block in section.blocks %}
+			{% if block.settings.image %}
+				<div class="swiper-slide first-screen__slide">
+					<img src="{{ block.settings.image | img_url: 'master' }}" alt="oracle - jewelry">
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endif %}
 
 {% schema %}
 {
@@ -32,7 +29,7 @@
   ],
   "presets": [
     {
-      "name": "Кастомний слайдер"
+      "name": "First Screen Slider"
     }
   ]
 }
