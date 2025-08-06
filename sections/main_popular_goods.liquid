@@ -1,5 +1,10 @@
 <section class="popular-goods">
-	<p>Products count: {{ collections['necklaces'].products.size }}</p>
+	<h3>Debug Information:</h3>
+  <p>All collections: {{ collections | map: 'title' | join: ', ' }}</p>
+  <p>Necklaces exists: {{ collections['necklaces'] | json }}</p>
+  <p>Necklaces products count: {{ collections['neckacles'].products.size }}</p>
+  <p>All products count: {{ collections.all.products.size }}</p>
+
   {% comment %} <div class="popular-goods__container">
     <h2 class="popular-goods__title title">Popular Items</h2>
     <div class="popular-goods__list">
