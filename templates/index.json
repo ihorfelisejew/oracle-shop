@@ -12,9 +12,36 @@
     "main": {
       "type": "template-404",
       "settings": {}
+    },
+    "main_first_screen_nEJmQN": {
+      "type": "main_first-screen",
+      "blocks": {
+        "slide_7mcwbJ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/main_first-screen-bg.png"
+          }
+        },
+        "slide_WMkaqF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/main_first-screen-bg.png"
+          }
+        }
+      },
+      "block_order": [
+        "slide_7mcwbJ",
+        "slide_WMkaqF"
+      ],
+      "name": "First Screen",
+      "settings": {
+        "main_fs_title": "Jewelry is made with love",
+        "main_fs_button": "Shop Now"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "main_first_screen_nEJmQN"
   ]
 }
