@@ -109,22 +109,22 @@
 				{% for link in linklists.main-menu.links %}
 					{% comment %} Перевіряємо обидва варіанти написання {% endcomment %}
 					{% if link.title == 'Jewelry'%}
-					{% for child_link in link.links %}
-						<ul class="categories__column">
-						<li class="category__item title-item">
-							<a href="{{ child_link.url }}" class="category__link">
-							{{ child_link.title }}
-							</a>
-						</li>
-						{% for grandchild_link in child_link.links %}
-							<li class="category__item">
-							<a href="{{ grandchild_link.url }}" class="category__link">
-								{{ grandchild_link.title }}
-							</a>
+						{% for child_link in link.links %}
+							<ul class="categories__column">
+							<li class="category__item title-item">
+								<a href="{{ child_link.url }}" class="category__link">
+								{{ child_link.title }}
+								</a>
 							</li>
+							{% for grandchild_link in child_link.links %}
+								<li class="category__item">
+								<a href="{{ grandchild_link.url }}" class="category__link">
+									{{ grandchild_link.title }}
+								</a>
+								</li>
+							{% endfor %}
+							</ul>
 						{% endfor %}
-						</ul>
-					{% endfor %}
 					{% endif %}
 				{% endfor %}
             </div>
@@ -140,7 +140,7 @@
         </button>
         <div class="categories__container">
             <div class="categories__list">
-                {% for link in main_menu.links %}
+                {% for link in linklists.main_menu.links %}
                     {% if link.title == 'Collections' %}
                         <ul class="categories__column">
                             {% for child_link in link.links %}
