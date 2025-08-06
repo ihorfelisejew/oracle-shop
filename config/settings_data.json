@@ -1,15 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "social_facebook_link": "https:\/\/www.facebook.com\/sndct\/",
-    "social_instagram_link": "https:\/\/instagram.com\/sndct_kyiv",
-    "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCDpie5qLnY1LMYfY41uNsfA\/",
-    "social_vimeo_link": "https:\/\/vimeo.com\/user8648495",
-    "content_for_index": [
-
-    ]
+    "social_facebook_link": "https://www.facebook.com/sndct/",
+    "social_instagram_link": "https://instagram.com/sndct_kyiv",
+    "social_youtube_link": "https://www.youtube.com/channel/UCDpie5qLnY1LMYfY41uNsfA/",
+    "social_vimeo_link": "https://vimeo.com/user8648495",
+    "social_twitter_link": "https://twitter.com/shopify",
+    "social_pinterest_link": "https://pinterest.com/shopify",
+    "social_tiktok_link": "https://tiktok.com/@shopify",
+    "social_tumblr_link": "https://shopify.tumblr.com",
+    "social_snapchat_link": "https://www.snapchat.com/add/shopify",
+    "favicon": "shopify://shop_images/favicon.jpg",
+    "content_for_index": []
   },
   "presets": {
-    "Default": {
-    }
+    "Default": {}
   }
 }

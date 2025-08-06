@@ -10,6 +10,18 @@
 {
   "type": "footer",
   "name": "Footer Group",
-  "sections": {},
-  "order": []
+  "sections": {
+    "footer_wEPB4j": {
+      "type": "footer",
+      "name": "Footer Texts",
+      "settings": {
+        "footer_story_title": "Our Story",
+        "footer_story_text": "The brand is experimenting with design, which is reflected in new collections. The style of jewelry organically echoes fashion trends, emphasizing the trendy modern sound.",
+        "footer_copyright": "© 2022 Bullet beauty. All rights reserved. Powered by Shopify"
+      }
+    }
+  },
+  "order": [
+    "footer_wEPB4j"
+  ]
 }
