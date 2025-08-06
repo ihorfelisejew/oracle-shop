@@ -12,33 +12,9 @@
     "main": {
       "type": "template-404",
       "settings": {}
-    },
-    "main_first_screen_pjdkHG": {
-      "type": "main_first-screen",
-      "blocks": {
-        "slide_zeTP3j": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/main_first-screen-bg.png"
-          }
-        },
-        "slide_Ut7j6g": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/main_first-screen-bg.png"
-          }
-        }
-      },
-      "block_order": [
-        "slide_zeTP3j",
-        "slide_Ut7j6g"
-      ],
-      "name": "First Screen Slider",
-      "settings": {}
     }
   },
   "order": [
-    "main",
-    "main_first_screen_pjdkHG"
+    "main"
   ]
 }
