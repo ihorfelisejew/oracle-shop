@@ -1,11 +1,293 @@
-{% render 'microdata-schema' %}
-{% schema %}
-{
-  "name": "Header",
-  "tag": "header",
-  "class": "header",
-  "settings":[
+<header class="header">
+	<div class="header__menu-background"></div>
+	<div class="shipping-notice__wrapper">
+		<p class="shipping__notice">
+			Free worldwide shipping for orders over $200
+		</p>
+	</div>
+	<div class="header__container">
+		<div class="header__content">
+			<div class="burger__button">
+				<span></span>
+			</div>
+			<div class="header__info">
+				<a href="#" class="header__logo">
+					<span class="icon-logo header__logo-image">
+					</span>
+				</a>
+				<nav class="header__menu">
+					<button class="close__button">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M5.28046 19.7849C4.98755 20.0778 4.51264 20.0778 4.21973 19.7849C3.92681 19.492 3.92681 19.0172 4.21973 18.7243L10.9427 12.0023L4.21969 5.28024C3.92677 4.98737 3.92677 4.51253 4.21969 4.21966C4.5126 3.92678 4.98751 3.92678 5.28042 4.21966L12.0034 10.9417L18.7265 4.21965C19.0194 3.92678 19.4943 3.92678 19.7872 4.21965C20.0801 4.51253 20.0801 4.98737 19.7872 5.28024L13.0642 12.0023L19.7872 18.7243C20.0801 19.0172 20.0801 19.492 19.7872 19.7849C19.4943 20.0778 19.0194 20.0778 18.7264 19.7849L12.0035 13.0629L5.28046 19.7849Z"
+								fill="currentColor" />
+						</svg>
+					</button>
+					<ul class="menu__list">
+						<li class="menu__item">
+							<button class="menu-item__content menu-item__button" data-menu="jewerly-menu">
+								Jewelry
+								<svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 1L6 6L11 1" stroke="currentColor" stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</button>
+						</li>
+						<li class="menu__item">
+							<button class="menu-item__content menu-item__button" data-menu="collection-menu">
+								Collections
+								<svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 1L6 6L11 1" stroke="currentColor" stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</button>
+						</li>
+						<li class="menu__item">
+							<a href="#" class="menu-item__content menu-item__link">
+								Blog
+							</a>
+						</li>
+						<li class="menu__item">
+							<a href="#" class="menu-item__content menu-item__link">
+								Contacts
+							</a>
+						</li>
+					</ul>
+					<a href="#" class="profile__button">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="12" cy="8" r="3.375" stroke="currentColor" stroke-width="1.25"
+								stroke-linecap="round" />
+							<path
+								d="M4.84913 16.9479C5.48883 14.6034 7.91473 13.5 10.345 13.5H13.655C16.0853 13.5 18.5112 14.6034 19.1509 16.9479C19.282 17.4287 19.3868 17.9489 19.4462 18.5015C19.5052 19.0507 19.0523 19.5 18.5 19.5H5.5C4.94772 19.5 4.49482 19.0507 4.55382 18.5015C4.6132 17.9489 4.71796 17.4287 4.84913 16.9479Z"
+								stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+						</svg>
+						<span>Account</span>
+					</a>
+				</nav>
+			</div>
+			<div class="header__buttons">
+				<button class="header__button-item search__button">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.25" />
+						<path d="M20 20L17 17" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+					</svg>
+				</button>
+				<a href="#" class="header__button-item profile__button">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="12" cy="8" r="3.375" stroke="currentColor" stroke-width="1.25"
+							stroke-linecap="round" />
+						<path
+							d="M4.84913 16.9479C5.48883 14.6034 7.91473 13.5 10.345 13.5H13.655C16.0853 13.5 18.5112 14.6034 19.1509 16.9479C19.282 17.4287 19.3868 17.9489 19.4462 18.5015C19.5052 19.0507 19.0523 19.5 18.5 19.5H5.5C4.94772 19.5 4.49482 19.0507 4.55382 18.5015C4.6132 17.9489 4.71796 17.4287 4.84913 16.9479Z"
+							stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+					</svg>
+				</a>
+				<button class="header__button-item cart__button">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M8 8L8 7C8 4.79086 9.79086 3 12 3V3C14.2091 3 16 4.79086 16 7L16 8"
+							stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+						<path
+							d="M4 12C4 10.1144 4 9.17157 4.58579 8.58579C5.17157 8 6.11438 8 8 8H16C17.8856 8 18.8284 8 19.4142 8.58579C20 9.17157 20 10.1144 20 12V13C20 16.7712 20 18.6569 18.8284 19.8284C17.6569 21 15.7712 21 12 21V21C8.22876 21 6.34315 21 5.17157 19.8284C4 18.6569 4 16.7712 4 13V12Z"
+							stroke="currentColor" stroke-width="1.25" />
+					</svg>
+					(2)
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="categories__wrapper jewerly-menu">
+		<button class="back__button">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M12 19L5 12M5 12L12 5M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					stroke-linejoin="round" />
+			</svg>
+		</button>
+		<div class="categories__container">
+			<div class="categories__list">
+				<ul class="categories__column">
+					<li class="category__item title-item">
+						<a href="#" class="category__link">
+							Rings
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Wedding rings
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							For an engagement
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Phalanx
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							With a pearl
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							With a diamond
+						</a>
+					</li>
+				</ul>
+				<ul class="categories__column">
+					<li class="category__item title-item">
+						<a href="#" class="category__link">
+							Bracelets
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Soft
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Straunch
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							On a thread
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Leather
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							For charms
+						</a>
+					</li>
+				</ul>
+				<ul class="categories__column">
+					<li class="category__item title-item">
+						<a href="#" class="category__link">
+							Earrings
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Earrings - pendants
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Broaches
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Сloves
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Congo
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Cafes
+						</a>
+					</li>
+				</ul>
+				<ul class="categories__column">
+					<li class="category__item title-item">
+						<a href="#" class="category__link">
+							Necklaces
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Invisible
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Multi-layered
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							With a pearl
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							With a diamond
+						</a>
+					</li>
+				</ul>
+				<ul class="categories__column">
+					<li class="category__item title-item">
+						<a href="#" class="category__link">
+							Unusual Jewelry
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Brooches
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Сrosses
+						</a>
+					</li>
+				</ul>
+				<ul class="categories__column">
+					<li class="category__item title-item">
+						<a href="#" class="category__link">
+							Certificate
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
-  ]
-}
-{% endschema %}
+	<div class="categories__wrapper collection-menu">
+		<button class="back__button">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M12 19L5 12M5 12L12 5M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					stroke-linejoin="round" />
+			</svg>
+		</button>
+		<div class="categories__container">
+			<div class="categories__list">
+				<ul class="categories__column">
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Bondi
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							India
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							Lake
+						</a>
+					</li>
+					<li class="category__item">
+						<a href="#" class="category__link">
+							First Love
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</header>
