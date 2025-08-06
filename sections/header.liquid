@@ -143,17 +143,17 @@
 				{% if link.title == 'Collections' %}
 				<ul class="categories__column">
 					{% for child_link in link.links %}
-					<li class="category__item">
-						<a href="{{ child_link.url }}" class="category__link">
-						{{ child_link.title }}
-						</a>
-					</li>
+						<li class="category__item">
+							<a href="{{ child_link.url }}" class="category__link">
+								{{ child_link.title }}
+							</a>
+						</li>
 					{% else %}
-					<li class="category__item">
-						<a href="{{ link.url }}" class="category__link">
-						{{ link.title }}
-						</a>
-					</li>
+						<li class="category__item">
+							<a href="{{ link.url }}" class="category__link">
+								{{ link.title }}
+							</a>
+						</li>
 					{% endfor %}
 				</ul>
 				{% endif %}
@@ -162,3 +162,30 @@
 		</div>
 	</div>
 </header>
+
+
+{% schema %}
+{
+  "name": "Shipping Notice",
+  "settings": [
+    {
+      "type": "text",
+      "id": "shipping_notice_text",
+      "label": "Shipping Notice Text",
+      "default": "Free worldwide shipping for orders over $200"
+    },
+    {
+      "type": "color",
+      "id": "shipping_notice_bg",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "shipping_notice_text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}
