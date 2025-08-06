@@ -13,10 +13,10 @@
       "type": "template-404",
       "settings": {}
     },
-    "main_first_screen_slider_9VmVmh": {
-      "type": "main_first-screen_slider",
+    "main_first_screen_pjdkHG": {
+      "type": "main_first-screen",
       "blocks": {
-        "slide_ENbeWy": {
+        "slide_Ut7j6g": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/main_first-screen-bg.png"
@@ -24,7 +24,7 @@
         }
       },
       "block_order": [
-        "slide_ENbeWy"
+        "slide_Ut7j6g"
       ],
       "name": "First Screen Slider",
       "settings": {}
@@ -32,6 +32,6 @@
   },
   "order": [
     "main",
-    "main_first_screen_slider_9VmVmh"
+    "main_first_screen_pjdkHG"
   ]
 }
