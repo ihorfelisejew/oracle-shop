@@ -24,25 +24,39 @@
 
 {% schema %}
 {
-  "name": "First Screen Slider",
-  "max_blocks": 10,
-  "blocks": [
-    {
-      "type": "slide",
-      "name": "Слайд",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Зображення слайда"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "First Screen Slider"
-    }
-  ]
+	"name": "First Screen",
+	"settings": [
+		{
+			"type": "text",
+			"id": "main_fs_title",
+			"label": "Title для секції",
+			"default": "Jewelry is made with love"
+		},
+		{
+			"type" : "text",
+			"id" : "main_fs_button",
+			"label": "Текст для кнопки",
+			"default": "Shop Now"
+		}
+	],  
+	"max_blocks": 10,
+	"blocks": [
+		{
+		"type": "slide",
+		"name": "Слайд",
+		"settings": [
+			{
+			"type": "image_picker",
+			"id": "image",
+			"label": "Зображення слайда"
+			}
+		]
+		}
+	],
+	"presets": [
+		{
+		"name": "First Screen Slider"
+		}
+	]
 }
 {% endschema %}
