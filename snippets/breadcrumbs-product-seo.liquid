@@ -1,0 +1,104 @@
+{%- assign site_structure = settings.site_structure -%}
+{%- assign collection_url = collection.url -%}
+{%- assign first_level_link = "" -%}
+{%- assign second_level_link = "" -%}
+{%- assign third_level_link = "" -%}
+{%- if site_structure != blank -%}
+    {%- for item in site_structure.links -%}
+        {%- if item.url contains 'collections' -%}
+            {%- assign collection_handle = item.url | split: 'collections/' | last -%}
+            {%- assign parent_collection = collections[collection_handle] -%}
+            {%- if product.collections contains parent_collection -%}
+                {%- assign first_level_link = parent_collection -%}
+                {%- if item.links != blank -%}
+                    {%- for child_item in item.links -%}
+                        {%- if child_item.url contains 'collections' -%}
+                            {%- assign collection_handle = child_item.url | split: 'collections/' | last -%}
+                            {%- assign child_collection = collections[collection_handle] -%}
+                            {%- if product.collections contains child_collection -%}
+                                {%- assign first_level_link = parent_collection -%}
+                                {%- assign second_level_link = child_collection -%}
+                                {%- if second_level_link == first_level_link -%}
+                                    {%- assign second_level_link = '' -%}
+                                {%- endif -%}
+                                {%- if child_item.links != blank -%}
+                                    {%- for grand_child_item in child_item.links -%}
+                                        {%- assign collection_handle = grand_child_item.url | split: 'collections/' | last -%}
+                                        {%- assign grand_child_collection = collections[collection_handle] -%}
+                                        {%- if product.collections contains grand_child_collection -%}
+                                            {%- assign first_level_link = parent_collection -%}
+                                            {%- assign second_level_link = child_collection -%}
+                                            {%- assign third_level_link = grand_child_collection -%}
+                                            {%- if second_level_link == third_level_link -%}
+                                                {%- assign third_level_link = '' -%}
+                                            {%- endif -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                            {%- endif -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                {%- endif -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endif -%}
+{% if third_level_link != blank %}
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ first_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ first_level_link.url }}"
+    },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{{ second_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ second_level_link.url }}"
+    },{
+    "@type": "ListItem",
+    "position": 4,
+    "name": "{{ third_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ third_level_link.url }}"
+    },{
+    "@type": "ListItem",
+    "position": 5,
+    "name": "{{ product.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ product.url }}"
+    }
+{% elsif second_level_link != blank %}
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ first_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ first_level_link.url }}"
+    },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{{ second_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ second_level_link.url }}"
+    },{
+    "@type": "ListItem",
+    "position": 4,
+    "name": "{{ product.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ product.url }}"
+    }
+{% elsif first_level_link != blank %}
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ first_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ first_level_link.url }}"
+    },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{{ product.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ product.url }}"
+    }
+{% else %}
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ product.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ product.url }}"
+    }
+{% endif %}

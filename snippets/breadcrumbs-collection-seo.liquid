@@ -1,0 +1,91 @@
+{%- assign site_structure = settings.site_structure -%}
+{%- assign collection_url = collection.url -%}
+{%- assign first_level_link = "" -%}
+{%- assign second_level_link = "" -%}
+{%- assign third_level_link = "" -%}
+{%- if site_structure != blank -%}
+    {%- for item in site_structure.links -%}
+        {%- if item.url contains 'collections' -%}
+            {%- assign collection_handle = item.url | split: 'collections/' | last -%}
+            {%- assign parent_collection = collections[collection_handle] -%}
+            {%- if item.url == collection_url -%}
+                {%- assign first_level_link = parent_collection -%}
+            {%- else -%}
+                {%- if item.links != blank -%}
+                    {%- for child_item in item.links -%}
+                        {%- if child_item.url contains 'collections' -%}
+                            {%- assign collection_handle = child_item.url | split: 'collections/' | last -%}
+                            {%- assign child_collection = collections[collection_handle] -%}
+                            {%- if child_item.url == collection_url -%}
+                                {%- assign first_level_link = parent_collection -%}
+                                {%- assign second_level_link = child_collection -%}
+                            {%- else -%}
+                                {%- if child_item.links != blank -%}
+                                    {%- for grand_child_item in child_item.links -%}
+                                        {%- assign collection_handle = grand_child_item.url | split: 'collections/' | last -%}
+                                        {%- assign grand_child_collection = collections[collection_handle] -%}
+                                        {%- if grand_child_item.url == collection_url -%}
+                                            {%- assign first_level_link = parent_collection -%}
+                                            {%- assign second_level_link = child_collection -%}
+                                            {%- assign third_level_link = grand_child_collection -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                            {%- endif -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                {%- endif -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endif -%}
+
+{% if third_level_link != blank %}
+
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ first_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ first_level_link.url }}"
+    }
+    ,{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{{ second_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ second_level_link.url }}"
+    }
+    ,{
+    "@type": "ListItem",
+    "position": 4,
+    "name": "{{ third_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ third_level_link.url }}"
+    }
+{% elsif  second_level_link != blank %}
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ first_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ first_level_link.url }}"
+    }
+    ,{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{{ second_level_link.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ second_level_link.url }}"
+    }
+
+{% elsif second_level_link == blank and third_level_link == blank %}
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ collection.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ collection.url }}"
+    }
+{% else %}
+    ,{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{{ collection.title | strip_html | remove: '"' }}",
+    "item": "{{ shop.url }}{{ collection.url }}"
+    }
+{% endif %}

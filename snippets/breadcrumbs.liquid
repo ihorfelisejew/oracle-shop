@@ -1,0 +1,16 @@
+<ul class="breadcrumb-section__list">
+    <li class="breadcrumb-section__item menu">
+        <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+    </li>
+    {% case template.name %}
+        {% when 'collection' %}
+            {% render 'breadcrumbs-collection' %}
+        {% when 'product' %}
+            {% render 'breadcrumbs-product' %}
+            <li class="breadcrumb-section__item menu">{{ product.title }}</li>
+        {% when 'search' %}
+        <li class="breadcrumb-section__item menu">{{ 'general.breadcrumbs.search' | t }}</li>
+        {% when 'page' %}
+            <li class="breadcrumb-section__item menu">{{ page.title }}</li>
+    {% endcase %}
+</ul>

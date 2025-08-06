@@ -1,0 +1,32 @@
+{%- if video != blank -%}
+    {% liquid
+        assign enable_lazy_load = settings.enable_lazy_load
+    %}
+    {%- case type -%}
+        {%- when 'video_obj' -%}
+            {%- liquid
+                assign video_url = ''
+                for source in video.sources
+                    if source.format == 'mp4'
+                        assign video_url = source.url
+                        break
+                    endif
+                endfor
+            -%}
+            <video{% if class != blank %} class="{{ class }}"{% endif %} playsinline autoplay loop muted>
+                {%- if lazyload == 'true' and enable_lazy_load %}
+                    <source data-src="{{ video_url }}" type="video/mp4" data-lazy-load>
+                {% else %}
+                    <source src="{{ video_url }}" type="video/mp4">
+                {% endif -%}
+            </video>
+        {% when 'video_link' %}
+            <video{% if class != blank %} class="{{ class }}"{% endif %} playsinline autoplay loop muted>
+                {%- if lazyload == 'true' and enable_lazy_load %}
+                    <source data-src="{{ video }}" type="video/mp4" data-lazy-load>
+                {% else %}
+                    <source src="{{ video }}" type="video/mp4">
+                {% endif -%}
+            </video>
+    {%- endcase -%}
+{%- endif -%}

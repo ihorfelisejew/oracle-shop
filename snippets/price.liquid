@@ -1,0 +1,15 @@
+{% if with_currency == 'false' %}
+    {%- assign formatted_price = price | money_without_currency -%}
+{% else %}
+    {%- assign formatted_price = price | money -%}
+{% endif %}
+{%- unless shop.money_format contains 'money' or shop.money_format contains '.' -%}
+    {%- if shop.money_format contains '{{amount}}' or shop.money_format contains '{{ amount }}' -%}
+        {% capture formatted_price %}{{ formatted_price | replace: '.', '.<sup>' | append: '</sup>' }}{% endcapture %}
+    {%- elsif shop.money_format contains '{{amount_with_comma_separator}}' or shop.money_format contains '{{ amount_with_comma_separator }}' -%}
+        {% capture formatted_price %}{{ formatted_price | replace: ',', ',<sup>' | append: '</sup>' }}{% endcapture %}
+    {%- elsif shop.money_format contains '{{amount_with_period_and_space_separator}}' -%}
+        {% capture formatted_price %}{{ formatted_price | replace: '.', '.<sup>' | append: '</sup>' }}{% endcapture %}
+    {%- endif -%}
+{%- endunless -%}
+{{ formatted_price }}

@@ -1,0 +1,18 @@
+{%- assign image_alt = image_alt | default: "image" -%}
+{%- assign image_tag_width = tag_width | default: 100 -%}
+{%- assign image_tag_height = tag_height | default: 100 -%}
+{%- if image_link != blank -%}
+    {%- if class != blank -%}
+        {% if lazyload == 'true' %}
+            <img class="{{ class }} data-lazy-load" data-src="{{ image_link }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ image_alt }}"  width="{{ image_tag_width }}" height="{{ image_tag_height }}" data-lazy-load >
+        {% else %}
+            <img class="{{ class }}" src="{{ image_link }}" alt="{{ image_alt }}" srcset="{{ image_srcset }}" sizes="{{ image_sizes }}" width="{{ image_tag_width }}" height="{{ image_height }}" >
+        {% endif %}
+    {%- else -%}
+        {% if lazyload == 'true' %}
+            <img class="data-lazy-load" data-src="{{ image_link }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ image_alt }}" width="{{ image_tag_width }}" height="{{ image_tag_height }}" data-lazy-load >
+        {% else %}
+            <img src="{{ image_link }}" alt="{{ image_alt }}" width="{{ image_tag_width }}" height="{{ image_tag_height }}" >
+        {% endif %}
+    {%- endif -%}
+{%- endif -%}

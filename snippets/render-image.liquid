@@ -1,0 +1,76 @@
+{%- if image != blank -%}
+    {%- assign image_alt = image.alt | default: "image" -%}
+    {%- assign image_width = width | default: image.width | at_most: 1200 -%}
+    {%- assign image_height = height | default: image.height | at_most: 1200 -%}
+    {%- assign image_tag_width = tag_width | default: image.width | at_most: 1200 -%}
+    {%- assign image_tag_height = tag_height | default: image.height | at_most: 1200 -%}
+    {%- assign image_srcset = nil -%}
+    {%- assign image_sizes = nil -%}
+    {%- if srcset != 'false' -%}
+        {% capture image_srcset %}
+            {%- if image.width >= 288 -%}{{ image | image_url: width: 288 }} 288w,{%- endif -%}
+            {%- if image.width >= 576 -%}{{ image | image_url: width: 576 }} 576w,{%- endif -%}
+            {%- if image.width >= 550 -%}{{ image | image_url: width: 550 }} 550w,{%- endif -%}
+            {%- if image.width >= 767 -%}{{ image | image_url: width: 767 }} 767w,{%- endif -%}
+            {%- if image.width >= 1100 -%}{{ image | image_url: width: 1100 }} 1100w,{%- endif -%}
+            {%- if image.width == 1100 or image.width == 767 or image.width == 550 or image.width == 576 or image.width == 288 -%}
+                {%- assign image_srcset_width = image.width | minus: 1 -%}
+                {{ image | image_url: width: image_srcset_width   }} {{ image.width | minus: 1 }}w
+            {%- else -%}
+                {{ image | image_url }} {{ image.width }}w
+            {%- endif -%}
+        {% endcapture %}
+    {% endif %}
+    {%- if sizes != 'false' -%}
+        {% if sizes != blank %}
+            {%- assign image_sizes = sizes -%}
+        {% else %}
+            {% capture image_sizes %}
+                {%- if image.width >= 1100 -%}(min-width: 1100px) 1100px,{%- endif -%}
+                {%- if image.width >= 767 -%}(max-width: 767px) 767px,{%- endif -%}
+                {%- if image.width >= 576 -%}(max-width: 576px) 567px,{%- endif -%}
+                {%- if image.width >= 550 -%}(max-width: 550px) 550px,{%- endif -%}
+                {%- if image.width >= 288 -%}(max-width: 288px) 288px,{%- endif -%}
+                100vw
+            {% endcapture %}
+        {% endif %}
+    {% endif %}
+    {%- assign image_srcset = image_srcset | strip -%}
+    {%- assign image_sizes = image_sizes | strip -%}
+    {%- if image_quality == "unlimited" -%}
+        {%- assign image_width =  image.width -%}
+        {%- assign image_height =  image.height -%}
+    {%- endif -%}
+    {%- case type -%}
+        {% when 'link_only' %}
+            {{ image | image_url: width: image_width }}
+        {% when 'remove_attr' %}
+            {%- if class != blank -%}
+                {% if lazyload == 'true' %}
+                    <img class="{{ class }} data-lazy-load" data-src="{{ image | image_url: width: image_width }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ image_alt }}"  data-lazy-load >
+                {% else %}
+                    {{ image | image_url: width: image_width | image_tag: class: class, srcset: nil, sizes:nil, alt: image_alt, width: nil, height: nil  }}
+                {% endif %}
+            {%- else -%}
+                {% if lazyload == 'true' %}
+                    <img class="data-lazy-load" data-src="{{ image | image_url: width: image_width }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ image_alt }}" data-lazy-load >
+                {% else %}
+                    {{ image | image_url: width: image_width | image_tag: srcset: nil, sizes:nil, alt: image_alt, width: nil, height: nil  }}
+                {% endif %}
+            {%- endif -%}
+        {% else %}
+            {%- if class != blank -%}
+                {% if lazyload == 'true' %}
+                    <img class="{{ class }} data-lazy-load" data-src="{{ image | image_url: width: image_width }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ image_alt }}" srcset="{{ image_srcset }}" sizes="{{ image_sizes }}" width="{{ image_width }}" height="{{ image_height }}" data-lazy-load >
+                {% else %}
+                    {{ image | image_url: width: image_width | image_tag: class: class, srcset: image_srcset, sizes:image_sizes, alt: image_alt, width: image_width, height: image_height  }}
+                {% endif %}
+            {%- else -%}
+                {% if lazyload == 'true' %}
+                    <img class="data-lazy-load" data-src="{{ image | image_url: width: image_width }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ image_alt }}" srcset="{{ image_srcset }}" sizes="{{ image_sizes }}" width="{{ image_width }}" height="{{ image_height }}" data-lazy-load >
+                {% else %}
+                    {{ image | image_url: width: image_width | image_tag: srcset: image_srcset, sizes:image_sizes, alt: image_alt, width: image_width, height: image_height  }}
+                {% endif %}
+            {%- endif -%}
+    {%- endcase -%}
+{%- endif -%}
