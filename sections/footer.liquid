@@ -130,7 +130,7 @@
 					</ul>
 				</div>
 				<div class="copyright">
-					© 2022 Bullet beauty. All rights reserved. Powered by Shopify
+					{{ section.settings.footer_copyright }}
 				</div>
 				<div class="footer__payments">
 					{% for type in shop.enabled_payment_types %}
@@ -141,3 +141,18 @@
 		</div>
 	</div>
 </footer>
+
+{% schema %}
+{
+	"name": "Copyright Text",
+	"settings": [
+		{
+			"type": "text",
+			"id": "footer_copyright",
+			"label": "Copyright Text",
+			"default": "© 2022 Bullet beauty. All rights reserved. Powered by Shopify"
+		}	
+	]
+}
+{% endschema %}
+
