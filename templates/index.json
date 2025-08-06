@@ -9,29 +9,12 @@
  */
 {
   "sections": {
-    "main_first_screen_slider_QmtUwR": {
-      "type": "main_first-screen_slider",
-      "blocks": {
-        "slide_CjBrmC": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/main_first-screen-bg.png"
-          }
-        }
-      },
-      "block_order": [
-        "slide_CjBrmC"
-      ],
-      "name": "Кастомний слайдер",
-      "settings": {}
-    },
     "main": {
       "type": "template-404",
       "settings": {}
     }
   },
   "order": [
-    "main_first_screen_slider_QmtUwR",
     "main"
   ]
 }
