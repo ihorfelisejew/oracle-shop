@@ -1,5 +1,6 @@
 <section class="popular-goods">
-  <div class="popular-goods__container">
+	<p>Products count: {{ collections['all'].products.size }}</p>
+  {% comment %} <div class="popular-goods__container">
     <h2 class="popular-goods__title title">Popular Items</h2>
     <div class="popular-goods__list">
       {%- assign popular_collection = collections['all'] -%}
@@ -31,7 +32,7 @@
     <div class="popular-goods__more-container">
       <a href="{{ collections['all'].url }}" class="popular-goods__more link">Show More</a>
     </div>
-  </div>
+  </div> {% endcomment %}
 </section>
 
 {% schema %}
