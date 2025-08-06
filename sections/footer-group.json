@@ -10,15 +10,6 @@
 {
   "type": "footer",
   "name": "Footer Group",
-  "sections": {
-    "main-footer": {
-      "type": "footer",
-      "settings": {
-        "footer_copyright": "© 2022 Bullet beauty. All rights reserved. Powered by Shopify"
-      }
-    }
-  },
-  "order": [
-    "main-footer"
-  ]
+  "sections": {},
+  "order": []
 }
