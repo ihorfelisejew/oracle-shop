@@ -6,7 +6,9 @@
   <p>All products count: {{ collections.all.products.size }}</p> {% endcomment %}
 
 	<div class="popular-goods__container">
-		<h2 class="popular-goods__title title">Popular Items</h2>
+		<h2 class="popular-goods__title title">
+			{{ section.settings.popular_goods_title }}
+		</h2>
 		<div class="popular-goods__list">
 		{%- assign popular_collection = collections['all'] -%}
 		{%- for product in popular_collection.products limit: 4 -%}
