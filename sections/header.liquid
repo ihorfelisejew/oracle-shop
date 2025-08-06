@@ -69,12 +69,15 @@
 				</nav>
 			</div>
 			<div class="header__buttons">
+				{% if section.settings.show_search %}
 				<button class="header__button-item search__button">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.25" />
 						<path d="M20 20L17 17" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
 					</svg>
 				</button>
+				{% endif %}
+				{% if section.settings.show_account %}
 				<a href="#" class="header__button-item profile__button">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<circle cx="12" cy="8" r="3.375" stroke="currentColor" stroke-width="1.25"
@@ -84,6 +87,8 @@
 							stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
 					</svg>
 				</a>
+				{% endif %}
+				{% if section.settings.show_cart %}
 				<button class="header__button-item cart__button">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M8 8L8 7C8 4.79086 9.79086 3 12 3V3C14.2091 3 16 4.79086 16 7L16 8"
@@ -94,6 +99,7 @@
 					</svg>
 					(2)
 				</button>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -167,12 +173,16 @@
 
 {% schema %}
 {
-  "name": "Shipping Notice",
+  "name": "Header",
   "settings": [
+    {
+      "type": "header",
+      "content": "Shipping Notice"
+    },
     {
       "type": "text",
       "id": "shipping_notice_text",
-      "label": "Shipping Notice Text",
+      "label": "Text",
       "default": "Free worldwide shipping for orders over $200"
     },
     {
@@ -186,6 +196,34 @@
       "id": "shipping_notice_text_color",
       "label": "Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Right Buttons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show Account Button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show Cart Button",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "icons_color",
+      "label": "Icons Color",
+      "default": "#000000"
     }
   ]
 }
