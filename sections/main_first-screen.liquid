@@ -1,0 +1,48 @@
+<section class="first-screen">
+	<div class="first-screen__bg swiper">
+		{% if section.blocks.size > 0 %}
+			<div class="swiper-wrapper">
+				{% for block in section.blocks %}
+					{% if block.settings.image %}
+						<div class="swiper-slide first-screen__slide">
+							<img src="{{ block.settings.image | img_url: 'master' }}" alt="oracle - jewelry">
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+	<div class="first-screen__content">
+		<h1 class="first-screen__title">
+			Jewelry is made with love
+		</h1>
+		<button class="first-screen__button btn white-btn">
+			Shop Now
+		</button>
+	</div>
+</section>
+
+{% schema %}
+{
+  "name": "First Screen Slider",
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Слайд",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Зображення слайда"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "First Screen Slider"
+    }
+  ]
+}
+{% endschema %}
