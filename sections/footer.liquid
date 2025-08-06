@@ -133,12 +133,9 @@
 					© 2022 Bullet beauty. All rights reserved. Powered by Shopify
 				</div>
 				<div class="footer__payments">
-					<img src="./img/payment_discover.png" alt="Discover">
-					<img src="./img/payment_diners.png" alt="Diners Club">
-					<img src="./img/payment_paypal.png" alt="PayPal">
-					<img src="./img/payment_amex.png" alt="AMEX">
-					<img src="./img/payment_mastercard.png" alt="MasterCard">
-					<img src="./img/payment_visa.png" alt="Visa">
+					{% for type in shop.enabled_payment_types %}
+						{{ type | payment_type_svg_tag: class: 'payment-icon' }}
+					{% endfor %}
 				</div>
 			</div>
 		</div>
