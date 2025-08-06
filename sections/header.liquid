@@ -108,7 +108,7 @@
                 <!-- Основний блок для Jewelry -->
 				{% for link in linklists.main-menu.links %}
 					{% comment %} Перевіряємо обидва варіанти написання {% endcomment %}
-					{% if link.title == 'Jewelry' or link.title == 'Jewerly' %}
+					{% if link.title == 'Jewelry'%}
 					{% for child_link in link.links %}
 						<ul class="categories__column">
 						<li class="category__item title-item">
