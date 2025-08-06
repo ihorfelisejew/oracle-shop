@@ -150,6 +150,14 @@
                                     </a>
                                 </li>
                             {% endfor %}
+							{% else %}
+							{% comment %} Якщо немає підпунктів {% endcomment %}
+							<li class="category__item">
+								<a href="{{ link.url }}" class="category__link">
+								{{ link.title }}
+								</a>
+							</li>
+							{% endfor %}
                         </ul>
                     {% endif %}
                 {% endfor %}
