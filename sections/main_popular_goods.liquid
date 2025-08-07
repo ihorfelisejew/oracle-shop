@@ -1,45 +1,48 @@
 <section class="popular-goods">
-	{% comment %} <h3>Debug Information:</h3>
-  <p>All collections: {{ collections | map: 'title' | join: ', ' }}</p>
-  <p>Necklaces exists: {{ collections['necklaces'] | json }}</p>
-  <p>Necklaces products count: {{ collections['neckacles'].products.size }}</p>
-  <p>All products count: {{ collections.all.products.size }}</p> {% endcomment %}
+  {% comment %}
+    <h3>Debug Information:</h3>
+    <p>All collections: {{ collections | map: 'title' | join: ', ' }}</p>
+    <p>Necklaces exists: {{ collections['necklaces'] | json }}</p>
+    <p>Necklaces products count: {{ collections['necklaces'].products.size }}</p>
+    <p>All products count: {{ collections.all.products.size }}</p>
+  {% endcomment %}
 
-	<div class="popular-goods__container">
-		<h2 class="popular-goods__title title">
-			{{ section.settings.popular_goods_title }}
-		</h2>
-		<div class="popular-goods__list">
-		{%- assign popular_collection = collections['all'] -%}
-		{%- for product in popular_collection.products limit: 4 -%}
-			<div class="product__item">
-			<a href="{{ product. 'New' -%}
-				<span class="product__label">New</span>
-				{%- endif -%}url }}" class="image__block">
-				{%- if product.tags contains
-				<img src="{{ product.featured_image | img_url: '300x' }}" 
-					alt="{{ product.title | escape }}"
-					loading="lazy"
-					width="300"
-					height="{{ 300 | divided_by: product.featured_image.aspect_ratio | round }}">
-				<span class="view-more">View More</span>
-			</a>
-			<a href="{{ product.url }}" class="product__name">{{ product.title }}</a>
-			<p class="product__price">
-				{{ product.price | money }}
-				{%- if product.compare_at_price > product.price -%}
-				<span class="old-price">{{ product.compare_at_price | money }}</span>
-				{%- endif -%}
-			</p>
-			</div>
-		{%- else -%}
-			<p class="no-products">No popular products found</p>
-		{%- endfor -%}
-		</div>
-		<div class="popular-goods__more-container">
-		<a href="{{ collections['all'].url }}" class="popular-goods__more link">Show More</a>
-		</div>
-	</div> 
+  <div class="popular-goods__container">
+    <h2 class="popular-goods__title title">
+      {{ section.settings.popular_goods_title }}
+    </h2>
+    <div class="popular-goods__list">
+      {%- assign popular_collection = collections['all'] -%}
+      {%- for product in popular_collection.products limit: 4 -%}
+        <div class="product__item">
+          <a href="{{ product.url }}" class="image__block">
+            {%- if product.tags contains 'New' -%}
+              <span class="product__label">New</span>
+            {%- endif -%}
+            <img
+              src="{{ product.featured_image | img_url: '300x' }}"
+              alt="{{ product.title | escape }}"
+              loading="lazy"
+              width="300"
+              height="{{ 300 | divided_by: product.featured_image.aspect_ratio | round }}">
+            <span class="view-more">View More</span>
+          </a>
+          <a href="{{ product.url }}" class="product__name">{{ product.title }}</a>
+          <p class="product__price">
+            {{ product.price | money }}
+            {%- if product.compare_at_price > product.price -%}
+              <span class="old-price">{{ product.compare_at_price | money }}</span>
+            {%- endif -%}
+          </p>
+        </div>
+      {%- else -%}
+        <p class="no-products">No popular products found</p>
+      {%- endfor -%}
+    </div>
+    <div class="popular-goods__more-container">
+      <a href="{{ collections['all'].url }}" class="popular-goods__more link">Show More</a>
+    </div>
+  </div>
 </section>
 
 {% schema %}
