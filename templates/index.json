@@ -114,20 +114,23 @@
       "settings": {
         "video_label": "View our video presentation",
         "video_title": "Fierce elegance encapsulates genuineness, beauty and poise.",
-        "video_desc": "It melds a strong essence of refinement with a hint of self-assured allure...",
+        "video_desc": "It melds a strong essence of refinement with a hint of self-assured allure, yielding a refined and commanding presence reminiscent of a resolute and graceful woman.",
         "video_poster": "shopify://shop_images/main_video-preview.png",
-        "video_src": "",
+        "video": "shopify://files/videos/main_promo-video.mov",
+        "gift_image": "shopify://shop_images/main_gift-card.png",
         "gift_title": "Gift Card",
-        "gift_desc": "",
+        "gift_desc": "We don’t have any ideas what to give ourselves, or are you doubting your choice?A gift certificate is a modern way to bring in friends and relatives, to pick out those who are dear to your heart.",
         "gift_price_1": "$200",
         "gift_price_2": "$500",
         "gift_price_3": "$1000",
         "sale_title": "Hurry! Sale 50%",
-        "sale_desc": "",
+        "sale_desc": "We don’t have any ideas what to give ourselves, or are you doubting your choice?A gift certificate is a modern way to bring in friends and relatives, to pick out those who are dear to your heart.",
         "sale_link": "",
         "sale_button_text": "Shop Now",
-        "newsletter_title": "",
-        "newsletter_desc": ""
+        "sale_image": "shopify://shop_images/main_sale-image.png",
+        "newsletter_image": "shopify://shop_images/main_newsletter-image.png",
+        "newsletter_title": "Newsletter",
+        "newsletter_desc": "Sign up for exclusive deals and early access to new products."
       }
     }
   },
