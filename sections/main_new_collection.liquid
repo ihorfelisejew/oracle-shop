@@ -1,0 +1,47 @@
+<section class="new-collection">
+  {% if section.settings.bg_image %}
+    <img class="new-collection__bg" src="{{ section.settings.bg_image | img_url: '1600x' }}" alt="{{ section.settings.title }}">
+  {% endif %}
+  <h2 class="new-collection__title">
+    {{ section.settings.title }}
+  </h2>
+  <a href="{{ section.settings.button_link }}" class="new-collection__btn btn white-btn">
+    {{ section.settings.button_text }}
+  </a>
+</section>
+
+{% schema %}
+{
+  "name": "New Collection Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "New Collection 2024"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Collection",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
