@@ -97,12 +97,23 @@
       "settings": {
         "title": "Blog"
       }
+    },
+    "main_new_collection_cKizAw": {
+      "type": "main_new_collection",
+      "name": "New Collection",
+      "settings": {
+        "bg_image": "shopify://shop_images/main_new-collection_bg.png",
+        "title": "New Collection 2024",
+        "button_text": "Shop Now",
+        "button_link": ""
+      }
     }
   },
   "order": [
     "main",
     "main_first_screen_nEJmQN",
     "main_categories_nLeAtx",
-    "main_blog_69wXyN"
+    "main_blog_69wXyN",
+    "main_new_collection_cKizAw"
   ]
 }
