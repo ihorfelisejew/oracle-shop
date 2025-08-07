@@ -107,6 +107,28 @@
         "button_text": "Shop Now",
         "button_link": ""
       }
+    },
+    "main_promo_AN7tc8": {
+      "type": "main_promo",
+      "name": "Promo Block",
+      "settings": {
+        "video_label": "View our video presentation",
+        "video_title": "Fierce elegance encapsulates genuineness, beauty and poise.",
+        "video_desc": "It melds a strong essence of refinement with a hint of self-assured allure...",
+        "video_poster": "shopify://shop_images/main_video-preview.png",
+        "video_src": "",
+        "gift_title": "Gift Card",
+        "gift_desc": "",
+        "gift_price_1": "$200",
+        "gift_price_2": "$500",
+        "gift_price_3": "$1000",
+        "sale_title": "Hurry! Sale 50%",
+        "sale_desc": "",
+        "sale_link": "",
+        "sale_button_text": "Shop Now",
+        "newsletter_title": "",
+        "newsletter_desc": ""
+      }
     }
   },
   "order": [
@@ -114,6 +136,7 @@
     "main_first_screen_nEJmQN",
     "main_categories_nLeAtx",
     "main_blog_69wXyN",
-    "main_new_collection_cKizAw"
+    "main_new_collection_cKizAw",
+    "main_promo_AN7tc8"
   ]
 }
