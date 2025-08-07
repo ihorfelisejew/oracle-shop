@@ -13,10 +13,19 @@
         </p>
       </div>
       <div class="video-block__content">
-        <video loop playsinline poster="{{ section.settings.video_poster | img_url: '800x' }}">
-          <source src="{{ section.settings.video_src }}" type="video/mp4" />
-          Oracle Jewelry - Elegance
-        </video>
+        {% if section.settings.video != blank %}
+			<video
+				class="new-collection__bg"
+				autoplay
+				loop
+				muted
+				playsinline
+				poster="{{ section.settings.video.preview_image | img_url: '800x' }}"
+			>
+				<source src="{{ section.settings.video.sources[0].url }}" type="video/mp4" />
+				Oracle Jewelry - Elegance
+			</video>
+		{% endif %}
         <button class="video-block__play">
           <!-- SVG (залишаємо як є) -->
         </button>
@@ -115,9 +124,9 @@
       "label": "Video Poster"
     },
     {
-      "type": "url",
-      "id": "video_src",
-      "label": "Video File URL (MP4)"
+      "type": "video",
+      "id": "video",
+      "label": "Promo Video"
     },
 
     {
