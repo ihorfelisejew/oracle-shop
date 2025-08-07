@@ -14,20 +14,26 @@
       </div>
       <div class="video-block__content">
         {% if section.settings.video != blank %}
-			<video
-				class="new-collection__bg"
-				autoplay
-				loop
-				muted
-				playsinline
-				poster="{{ section.settings.video.preview_image | img_url: '800x' }}"
-			>
-				<source src="{{ section.settings.video.sources[0].url }}" type="video/mp4" />
-				Oracle Jewelry - Elegance
-			</video>
-		{% endif %}
+          <video
+            class="new-collection__bg"
+            autoplay
+            loop
+            muted
+            playsinline
+            poster="{{ section.settings.video.video_poster | img_url: '800x' }}">
+            <source src="{{ section.settings.video.sources[0].url }}" type="video/mp4" />
+            Oracle Jewelry - Elegance
+          </video>
+        {% endif %}
         <button class="video-block__play">
-          <!-- SVG (залишаємо як є) -->
+          <svg
+            width="120"
+            height="120"
+            viewBox="0 0 120 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M60 13.125C50.729 13.125 41.6662 15.8742 33.9577 21.0249C26.2491 26.1756 20.241 33.4964 16.6932 42.0617C13.1453 50.627 12.217 60.052 14.0257 69.1449C15.8344 78.2377 20.2988 86.59 26.8544 93.1456C33.41 99.7012 41.7623 104.166 50.8552 105.974C59.948 107.783 69.373 106.855 77.9383 103.307C86.5036 99.759 93.8245 93.7509 98.9752 86.0424C104.126 78.3338 106.875 69.271 106.875 60C106.861 47.5722 101.918 35.6573 93.1306 26.8694C84.3428 18.0816 72.4279 13.1386 60 13.125ZM60 103.125C51.4707 103.125 43.1329 100.596 36.0411 95.8571C28.9492 91.1185 23.4217 84.3833 20.1577 76.5032C16.8937 68.6232 16.0397 59.9522 17.7037 51.5867C19.3676 43.2213 23.4749 35.5372 29.506 29.506C35.5372 23.4749 43.2213 19.3676 51.5868 17.7036C59.9522 16.0396 68.6232 16.8937 76.5032 20.1577C84.3833 23.4217 91.1185 28.9492 95.8571 36.041C100.596 43.1329 103.125 51.4707 103.125 60C103.113 71.4337 98.5651 82.3955 90.4803 90.4803C82.3955 98.5651 71.4337 103.113 60 103.125ZM76.0406 58.4391L53.5406 43.4391C53.2582 43.2506 52.9299 43.1424 52.5908 43.126C52.2516 43.1095 51.9144 43.1855 51.6151 43.3458C51.3157 43.506 51.0655 43.7446 50.8911 44.0359C50.7168 44.3272 50.6248 44.6605 50.625 45V75C50.6246 75.3395 50.7164 75.6728 50.8906 75.9642C51.0648 76.2556 51.3149 76.4943 51.6141 76.6547C51.9136 76.8151 52.251 76.8911 52.5903 76.8745C52.9297 76.858 53.2581 76.7496 53.5406 76.5609L76.0406 61.5609C76.2978 61.3898 76.5087 61.1577 76.6546 60.8854C76.8005 60.6131 76.8769 60.3089 76.8769 60C76.8769 59.6911 76.8005 59.3869 76.6546 59.1146C76.5087 58.8423 76.2978 58.6102 76.0406 58.4391ZM54.375 71.4984V48.5016L71.6203 60L54.375 71.4984Z" fill="currentColor" />
+          </svg>
         </button>
       </div>
     </div>
@@ -48,11 +54,25 @@
           <div class="gift-card__price">
             <button type="button" class="price__button">
               <span>{{ section.settings.gift_price_1 }}</span>
+              <svg
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.03939 0.217251C9.08632 0.16946 9.15021 0.142578 9.21686 0.142578C9.28351 0.142578 9.3474 0.16946 9.39433 0.217251L9.92425 0.752434C9.97258 0.798244 10 0.862204 10 0.929145C10 0.996086 9.97258 1.06005 9.92425 1.10586L5.32995 5.74579C5.2597 5.81682 5.1644 5.85678 5.06499 5.85686L4.93501 5.85686C4.8356 5.85678 4.7403 5.81682 4.67005 5.74579L0.0757474 1.10586C0.0274162 1.06005 -3.7308e-08 0.996086 -3.43819e-08 0.929144C-3.14558e-08 0.862203 0.0274162 0.798243 0.0757475 0.752433L0.605667 0.21725C0.652601 0.169459 0.716492 0.142578 0.78314 0.142578C0.84979 0.142578 0.913679 0.169459 0.960613 0.21725L5 4.29676L9.03939 0.217251Z" fill="currentColor" />
+              </svg>
             </button>
             <ul class="price__dropdown">
-              <li class="price__item active"><button type="button">{{ section.settings.gift_price_1 }}</button></li>
-              <li class="price__item"><button type="button">{{ section.settings.gift_price_2 }}</button></li>
-              <li class="price__item"><button type="button">{{ section.settings.gift_price_3 }}</button></li>
+              <li class="price__item active">
+                <button type="button">{{ section.settings.gift_price_1 }}</button>
+              </li>
+              <li class="price__item">
+                <button type="button">{{ section.settings.gift_price_2 }}</button>
+              </li>
+              <li class="price__item">
+                <button type="button">{{ section.settings.gift_price_3 }}</button>
+              </li>
             </ul>
           </div>
           <button type="submit" class="gift-card__buy-now btn">Buy Now</button>
@@ -87,7 +107,11 @@
           {{ section.settings.newsletter_desc }}
         </p>
         <form class="newsletter__form">
-          <input type="email" name="email" id="email" placeholder="Your Email">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Your Email">
           <button type="submit" class="newsletter__submit btn">Subscribe</button>
         </form>
       </div>
@@ -97,122 +121,116 @@
 
 
 {% schema %}
-{
-  "name": "Promo Block",
-  "settings": [
-    {
-      "type": "text",
-      "id": "video_label",
-      "label": "Video Label",
-      "default": "View our video presentation"
-    },
-    {
-      "type": "text",
-      "id": "video_title",
-      "label": "Video Title",
-      "default": "Fierce elegance encapsulates genuineness, beauty and poise."
-    },
-    {
-      "type": "textarea",
-      "id": "video_desc",
-      "label": "Video Description",
-      "default": "It melds a strong essence of refinement with a hint of self-assured allure..."
-    },
-    {
-      "type": "image_picker",
-      "id": "video_poster",
-      "label": "Video Poster"
-    },
-    {
-      "type": "video",
-      "id": "video",
-      "label": "Promo Video"
-    },
-
-    {
-      "type": "image_picker",
-      "id": "gift_image",
-      "label": "Gift Card Image"
-    },
-    {
-      "type": "text",
-      "id": "gift_title",
-      "label": "Gift Card Title",
-      "default": "Gift Card"
-    },
-    {
-      "type": "textarea",
-      "id": "gift_desc",
-      "label": "Gift Card Description"
-    },
-    {
-      "type": "text",
-      "id": "gift_price_1",
-      "label": "Gift Card Price 1",
-      "default": "$200"
-    },
-    {
-      "type": "text",
-      "id": "gift_price_2",
-      "label": "Gift Card Price 2",
-      "default": "$500"
-    },
-    {
-      "type": "text",
-      "id": "gift_price_3",
-      "label": "Gift Card Price 3",
-      "default": "$1000"
-    },
-
-    {
-      "type": "text",
-      "id": "sale_title",
-      "label": "Sale Title",
-      "default": "Hurry! Sale 50%"
-    },
-    {
-      "type": "textarea",
-      "id": "sale_desc",
-      "label": "Sale Description"
-    },
-    {
-      "type": "url",
-      "id": "sale_link",
-      "label": "Sale Button Link"
-    },
-    {
-      "type": "text",
-      "id": "sale_button_text",
-      "label": "Sale Button Text",
-      "default": "Shop Now"
-    },
-    {
-      "type": "image_picker",
-      "id": "sale_image",
-      "label": "Sale Image"
-    },
-
-    {
-      "type": "image_picker",
-      "id": "newsletter_image",
-      "label": "Newsletter Image"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_title",
-      "label": "Newsletter Title"
-    },
-    {
-      "type": "textarea",
-      "id": "newsletter_desc",
-      "label": "Newsletter Description"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Promo Block",
-      "category": "Custom"
-    }
-  ]
-}
+  {
+    "name": "Promo Block",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Video Block"
+      },
+      {
+        "type": "text",
+        "id": "video_label",
+        "label": "Video Label",
+        "default": "View our video presentation"
+      },
+      {
+        "type": "text",
+        "id": "video_title",
+        "label": "Video Title",
+        "default": "Fierce elegance encapsulates genuineness, beauty and poise."
+      },
+      {
+        "type": "textarea",
+        "id": "video_desc",
+        "label": "Video Description",
+        "default": "It melds a strong essence of refinement with a hint of self-assured allure..."
+      }, {
+        "type": "image_picker",
+        "id": "video_poster",
+        "label": "Video Poster"
+      }, {
+        "type": "video",
+        "id": "video",
+        "label": "Promo Video"
+      }, {
+        "type": "header",
+        "content": "Gift Card Block"
+      }, {
+        "type": "image_picker",
+        "id": "gift_image",
+        "label": "Gift Card Image"
+      }, {
+        "type": "text",
+        "id": "gift_title",
+        "label": "Gift Card Title",
+        "default": "Gift Card"
+      }, {
+        "type": "textarea",
+        "id": "gift_desc",
+        "label": "Gift Card Description"
+      }, {
+        "type": "text",
+        "id": "gift_price_1",
+        "label": "Gift Card Price 1",
+        "default": "$200"
+      }, {
+        "type": "text",
+        "id": "gift_price_2",
+        "label": "Gift Card Price 2",
+        "default": "$500"
+      }, {
+        "type": "text",
+        "id": "gift_price_3",
+        "label": "Gift Card Price 3",
+        "default": "$1000"
+      }, {
+        "type": "header",
+        "content": "Sale Block"
+      }, {
+        "type": "text",
+        "id": "sale_title",
+        "label": "Sale Title",
+        "default": "Hurry! Sale 50%"
+      }, {
+        "type": "textarea",
+        "id": "sale_desc",
+        "label": "Sale Description"
+      }, {
+        "type": "url",
+        "id": "sale_link",
+        "label": "Sale Button Link"
+      }, {
+        "type": "text",
+        "id": "sale_button_text",
+        "label": "Sale Button Text",
+        "default": "Shop Now"
+      }, {
+        "type": "image_picker",
+        "id": "sale_image",
+        "label": "Sale Image"
+      }, {
+        "type": "header",
+        "content": "Newsletter Block"
+      }, {
+        "type": "image_picker",
+        "id": "newsletter_image",
+        "label": "Newsletter Image"
+      }, {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Newsletter Title"
+      }, {
+        "type": "textarea",
+        "id": "newsletter_desc",
+        "label": "Newsletter Description"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Promo Block",
+        "category": "Custom"
+      }
+    ]
+  }
 {% endschema %}
