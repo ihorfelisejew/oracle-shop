@@ -1,0 +1,209 @@
+<section class="promo-block">
+  <div class="promo-block__container">
+    <div class="promo__video-block">
+      <div class="video-block__info">
+        <p class="video-block__label">
+          {{ section.settings.video_label }}
+        </p>
+        <h2 class="video-block__title title">
+          {{ section.settings.video_title }}
+        </h2>
+        <p class="video-block__desc">
+          {{ section.settings.video_desc }}
+        </p>
+      </div>
+      <div class="video-block__content">
+        <video loop playsinline poster="{{ section.settings.video_poster | img_url: '800x' }}">
+          <source src="{{ section.settings.video_src }}" type="video/mp4" />
+          Oracle Jewelry - Elegance
+        </video>
+        <button class="video-block__play">
+          <!-- SVG (залишаємо як є) -->
+        </button>
+      </div>
+    </div>
+
+    <div class="promo-list">
+      <!-- Gift card -->
+      <div class="promo__list-item gift-card__image">
+        <img src="{{ section.settings.gift_image | img_url: '600x' }}" alt="Gift Card">
+      </div>
+      <div class="promo__list-item gift-card__content">
+        <h3 class="gift-card__title title">
+          {{ section.settings.gift_title }}
+        </h3>
+        <p class="gift-card__desc">
+          {{ section.settings.gift_desc }}
+        </p>
+        <form class="gift-card__buy-form">
+          <div class="gift-card__price">
+            <button type="button" class="price__button">
+              <span>{{ section.settings.gift_price_1 }}</span>
+            </button>
+            <ul class="price__dropdown">
+              <li class="price__item active"><button type="button">{{ section.settings.gift_price_1 }}</button></li>
+              <li class="price__item"><button type="button">{{ section.settings.gift_price_2 }}</button></li>
+              <li class="price__item"><button type="button">{{ section.settings.gift_price_3 }}</button></li>
+            </ul>
+          </div>
+          <button type="submit" class="gift-card__buy-now btn">Buy Now</button>
+        </form>
+      </div>
+
+      <!-- Sale -->
+      <div class="promo__list-item sale__info">
+        <h3 class="sale-info__title title">
+          {{ section.settings.sale_title }}
+        </h3>
+        <p class="sale-info__desc">
+          {{ section.settings.sale_desc }}
+        </p>
+        <a href="{{ section.settings.sale_link }}" class="sale-info__shop-now btn">
+          {{ section.settings.sale_button_text }}
+        </a>
+      </div>
+      <div class="promo__list-item sale__image">
+        <img src="{{ section.settings.sale_image | img_url: '600x' }}" alt="Sale 50%">
+      </div>
+
+      <!-- Newsletter -->
+      <div class="promo__list-item newsletter__image">
+        <img src="{{ section.settings.newsletter_image | img_url: '600x' }}" alt="Newsletter">
+      </div>
+      <div class="promo__list-item newsletter__info">
+        <h3 class="newsletter__title title">
+          {{ section.settings.newsletter_title }}
+        </h3>
+        <p class="newsletter__desc">
+          {{ section.settings.newsletter_desc }}
+        </p>
+        <form class="newsletter__form">
+          <input type="email" name="email" id="email" placeholder="Your Email">
+          <button type="submit" class="newsletter__submit btn">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Promo Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_label",
+      "label": "Video Label",
+      "default": "View our video presentation"
+    },
+    {
+      "type": "text",
+      "id": "video_title",
+      "label": "Video Title",
+      "default": "Fierce elegance encapsulates genuineness, beauty and poise."
+    },
+    {
+      "type": "textarea",
+      "id": "video_desc",
+      "label": "Video Description",
+      "default": "It melds a strong essence of refinement with a hint of self-assured allure..."
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video Poster"
+    },
+    {
+      "type": "url",
+      "id": "video_src",
+      "label": "Video File URL (MP4)"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "gift_image",
+      "label": "Gift Card Image"
+    },
+    {
+      "type": "text",
+      "id": "gift_title",
+      "label": "Gift Card Title",
+      "default": "Gift Card"
+    },
+    {
+      "type": "textarea",
+      "id": "gift_desc",
+      "label": "Gift Card Description"
+    },
+    {
+      "type": "text",
+      "id": "gift_price_1",
+      "label": "Gift Card Price 1",
+      "default": "$200"
+    },
+    {
+      "type": "text",
+      "id": "gift_price_2",
+      "label": "Gift Card Price 2",
+      "default": "$500"
+    },
+    {
+      "type": "text",
+      "id": "gift_price_3",
+      "label": "Gift Card Price 3",
+      "default": "$1000"
+    },
+
+    {
+      "type": "text",
+      "id": "sale_title",
+      "label": "Sale Title",
+      "default": "Hurry! Sale 50%"
+    },
+    {
+      "type": "textarea",
+      "id": "sale_desc",
+      "label": "Sale Description"
+    },
+    {
+      "type": "url",
+      "id": "sale_link",
+      "label": "Sale Button Link"
+    },
+    {
+      "type": "text",
+      "id": "sale_button_text",
+      "label": "Sale Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "image_picker",
+      "id": "sale_image",
+      "label": "Sale Image"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "newsletter_image",
+      "label": "Newsletter Image"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Title"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_desc",
+      "label": "Newsletter Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Block",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
