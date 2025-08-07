@@ -15,10 +15,7 @@
       <div class="video-block__content">
         {% if section.settings.video != blank %}
           <video
-            class="new-collection__bg"
-            autoplay
             loop
-            muted
             playsinline
             poster="{{ section.settings.video_poster | img_url: '800x' }}">
             <source src="{{ section.settings.video.sources[0].url }}" type="video/mp4" />

@@ -4,7 +4,7 @@
       {{ section.settings.popular_goods_title }}
     </h2>
     <div class="popular-goods__list">
-      {%- assign popular_collection = collections['all'] -%}
+      {%- assign popular_collection = collections[section.settings.collection] -%}
       {%- for product in popular_collection.products limit: 4 -%}
         <div class="product__item">
           <a href="{{ product.url }}" class="image__block">
@@ -38,20 +38,24 @@
 </section>
 
 {% schema %}
-{
-  "name": "Popular Goods",
-  "settings": [
-	{
-		"type" : "text",
-		"id" : "popular_goods_title",
-		"label" : "Title",
-		"default" : "Popular Items"
-	}
-  ],
-  "presets": [
-    {
-      "name": "Popular Goods"
-    }
-  ]
-}
+  {
+    "name": "Popular Goods",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Select Collection"
+      }, {
+        "type": "text",
+        "id": "popular_goods_title",
+        "label": "Title",
+        "default": "Popular Items"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Popular Goods"
+      }
+    ]
+  }
 {% endschema %}
