@@ -54,17 +54,6 @@
     "main_blog_69wXyN": {
       "type": "main_blog",
       "blocks": {
-        "blog_post_PNJigq": {
-          "type": "blog_post",
-          "settings": {
-            "image": "shopify://shop_images/main__blog-1.png",
-            "title": "Blog Title",
-            "date": "March 25, 2022",
-            "description": "Experts strongly recommend not to do makeup before flying on an airplane, even if there should be a very short flight. The fact is that the cabin is very low humidity, it never rises ...",
-            "link": "",
-            "read_more_text": "Read More"
-          }
-        },
         "blog_post_fga7ep": {
           "type": "blog_post",
           "settings": {
@@ -100,7 +89,6 @@
         }
       },
       "block_order": [
-        "blog_post_PNJigq",
         "blog_post_fga7ep",
         "blog_post_JCHtbc",
         "blog_post_Ewe4Kg"
