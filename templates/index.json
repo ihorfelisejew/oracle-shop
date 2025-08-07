@@ -39,6 +39,14 @@
         "main_fs_button": "Shop Now"
       }
     },
+    "main_popular_goods_HyJrXk": {
+      "type": "main_popular_goods",
+      "name": "Popular Goods",
+      "settings": {
+        "collection": "all",
+        "popular_goods_title": "Popular Items"
+      }
+    },
     "main_categories_nLeAtx": {
       "type": "main_categories",
       "name": "Categories section",
@@ -133,23 +141,15 @@
         "newsletter_desc": "Sign up for exclusive deals and early access to new products.",
         "newsletter_button_text": "Subscribe"
       }
-    },
-    "main_popular_goods_HyJrXk": {
-      "type": "main_popular_goods",
-      "name": "Popular Goods",
-      "settings": {
-        "collection": "all",
-        "popular_goods_title": "Popular Items"
-      }
     }
   },
   "order": [
     "main",
     "main_first_screen_nEJmQN",
+    "main_popular_goods_HyJrXk",
     "main_categories_nLeAtx",
     "main_blog_69wXyN",
     "main_new_collection_cKizAw",
-    "main_promo_AN7tc8",
-    "main_popular_goods_HyJrXk"
+    "main_promo_AN7tc8"
   ]
 }
