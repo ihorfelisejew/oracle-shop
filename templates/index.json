@@ -38,10 +38,23 @@
         "main_fs_title": "Jewelry is made with love",
         "main_fs_button": "Shop Now"
       }
+    },
+    "main_categories_nLeAtx": {
+      "type": "main_categories",
+      "name": "Categories section",
+      "settings": {
+        "title": "Minimalism and simplicity combined with interesting shapes. Choose a piece of jewelry that you like.",
+        "image_earrings": "shopify://shop_images/main_category_1.png",
+        "image_bracelets": "shopify://shop_images/main_category_2.png",
+        "image_rings": "shopify://shop_images/main_category_3.png",
+        "image_unusual": "shopify://shop_images/main_category_4.png",
+        "image_necklaces": "shopify://shop_images/main_category_5.png"
+      }
     }
   },
   "order": [
     "main",
-    "main_first_screen_nEJmQN"
+    "main_first_screen_nEJmQN",
+    "main_categories_nLeAtx"
   ]
 }
