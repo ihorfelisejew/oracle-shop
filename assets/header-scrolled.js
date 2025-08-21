@@ -1,4 +1,3 @@
-"use strict";
 
 const header = document.querySelector("header");
 const shippingNotice = header.querySelector(".shipping-notice__wrapper");
