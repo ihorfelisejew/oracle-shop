@@ -20,14 +20,12 @@ function checkPageScroll() {
 // Закриває всі відкриті меню
 function closeAllMenus() {
   headerMenuButtons.forEach(button => {
-    const menuClass = button.dataset.menu;
-    const menu = document.querySelector("." + menuClass);
+    const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
     button.classList.remove("active");
     menu.classList.remove("active");
     /*------для десктопного меню------*/
     if (window.matchMedia("(min-width: 769px)").matches) {
       menu.style.maxHeight = "0";
-      phoneMenuBg.classList.remove("active");
     }
   });
   header.classList.remove("opened");
@@ -54,8 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Клік по меню
   headerMenuButtons.forEach(button => {
-    const menuClass = button.dataset.menu;
-    const menu = document.querySelector("." + menuClass);
+    const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
     button.addEventListener("click", e => {
       e.stopPropagation(); // Щоб не спрацьовував обробник document
       toggleMenu(button, menu);
@@ -66,8 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", event => {
     let clickInside = false;
     headerMenuButtons.forEach(button => {
-      const menuClass = button.dataset.menu;
-      const menu = document.querySelector("." + menuClass);
+      const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
       if (button.contains(event.target) || menu.contains(event.target)) {
         clickInside = true;
       }
@@ -81,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         if (window.matchMedia("(max-width: 768px)").matches) {
           menuBlock.classList.remove("opened");
+          phoneMenuBg.classList.remove("active");
         }
       }, 300);
       closeAllMenus();
@@ -90,6 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Скрол — оновлення shipping + закриття меню
   window.addEventListener("scroll", () => {
     checkPageScroll();
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      setTimeout(() => {
+        menuBlock.classList.remove("opened");
+        phoneMenuBg.classList.remove("active");
+      }, 300);
+    }
     closeAllMenus();
   });
 
@@ -109,8 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /*-----back to main menu-----*/
     headerMenuButtons.forEach(button => {
-      const menuClass = button.dataset.menu;
-      const menu = document.querySelector("." + menuClass);
+      const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
       const menuBackButton = menu.querySelector(".back__button");
       const menuList = menu.querySelector(".categories__list");
       menuList.style.minHeight = menuList.scrollHeight + 40 + "px";
