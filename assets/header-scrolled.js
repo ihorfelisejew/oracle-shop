@@ -1,4 +1,3 @@
-
 const header = document.querySelector("header");
 const shippingNotice = header.querySelector(".shipping-notice__wrapper");
 const headerMenuButtons = header.querySelectorAll(".menu-item__button");
@@ -18,8 +17,10 @@ function checkPageScroll() {
 
 // Закриває всі відкриті меню
 function closeAllMenus() {
-  headerMenuButtons.forEach(button => {
-    const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
+  headerMenuButtons.forEach((button) => {
+    const menu = button
+      .closest(".menu__item")
+      .querySelector(".categories__wrapper");
     button.classList.remove("active");
     menu.classList.remove("active");
     /*------для десктопного меню------*/
@@ -50,25 +51,32 @@ document.addEventListener("DOMContentLoaded", function () {
   checkPageScroll();
 
   // Клік по меню
-  headerMenuButtons.forEach(button => {
-    const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
-    button.addEventListener("click", e => {
+  headerMenuButtons.forEach((button) => {
+    const menu = button
+      .closest(".menu__item")
+      .querySelector(".categories__wrapper");
+    button.addEventListener("click", (e) => {
       e.stopPropagation(); // Щоб не спрацьовував обробник document
       toggleMenu(button, menu);
     });
   });
 
   // Клік поза меню — закриває все
-  document.addEventListener("click", event => {
+  document.addEventListener("click", (event) => {
     let clickInside = false;
-    headerMenuButtons.forEach(button => {
-      const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
+    headerMenuButtons.forEach((button) => {
+      const menu = button
+        .closest(".menu__item")
+        .querySelector(".categories__wrapper");
       if (button.contains(event.target) || menu.contains(event.target)) {
         clickInside = true;
       }
     });
     if (window.matchMedia("(max-width: 768px)").matches) {
-      if (menuBlock.contains(event.target) || burgerButton.contains(event.target)) {
+      if (
+        menuBlock.contains(event.target) ||
+        burgerButton.contains(event.target)
+      ) {
         clickInside = true;
       }
     }
@@ -110,8 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /*-----back to main menu-----*/
-    headerMenuButtons.forEach(button => {
-      const menu = button.closest(".menu__item").querySelector(".categories__wrapper");
+    headerMenuButtons.forEach((button) => {
+      const menu = button
+        .closest(".menu__item")
+        .querySelector(".categories__wrapper");
       const menuBackButton = menu.querySelector(".back__button");
       const menuList = menu.querySelector(".categories__list");
       menuList.style.minHeight = menuList.scrollHeight + 40 + "px";
