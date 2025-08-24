@@ -13,11 +13,11 @@
       <div class="header__info">
         <a href="#" class="header__logo">
           <img
-            src="{{ section.settings.header_logo-white }}"
+            src="{{ section.settings.header_logo-white | img_url: '300x' }}"
             alt="ORACLE"
             class="header__logo-image white">
           <img
-            src="{{ section.settings.header_logo-dark }}"
+            src="{{ section.settings.header_logo-dark | img_url: '300x' }}"
             alt="ORACLE"
             class="header__logo-image dark">
         </a>
