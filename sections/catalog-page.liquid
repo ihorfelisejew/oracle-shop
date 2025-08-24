@@ -60,7 +60,6 @@
   <div class="products-list">
     {% paginate collection.products by 12 %}
       {% for product_item in collection.products %}
-        {# Змінено ім'я змінної #}
         <div class="product-list__item">
           <a href="{{ product_item.url }}" class="image__block">
             {%- if product_item.tags contains 'New' -%}
