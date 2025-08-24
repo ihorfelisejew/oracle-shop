@@ -58,7 +58,7 @@
     <p class="collection-description">{{ collection.description }}</p>
   {% endif %}
   <div class="products-list">
-    {% paginate collection.products by 12 %}
+    {% paginate collection.products by 8 %}
       {% for product_item in collection.products %}
         <div class="product-list__item">
           <a href="{{ product_item.url }}" class="image__block">
