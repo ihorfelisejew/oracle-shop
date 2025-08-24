@@ -12,7 +12,14 @@
       </div>
       <div class="header__info">
         <a href="#" class="header__logo">
-          <span class="icon-logo header__logo-image"></span>
+          <img
+            src="../img/logo.png"
+            alt="ORACLE"
+            class="header__logo-image white">
+          <img
+            src="../img/logo-dark.png"
+            alt="ORACLE"
+            class="header__logo-image dark">
         </a>
         <nav class="header__menu">
           <button class="close__button">
@@ -215,6 +222,13 @@
         "id": "shipping_notice_text_color",
         "label": "Text Color",
         "default": "#ffffff"
+      }, {
+        "type": "header",
+        "content": "Logo"
+      }, {
+        "type": "image_picker",
+        "id": "header_logo",
+        "label": "Logo image"
       }, {
         "type": "header",
         "content": "Right Buttons"
