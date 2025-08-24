@@ -59,7 +59,7 @@
   {% endif %}
   <div class="catalog-page__header">
   	<form class="search-form">
-		<input type="text" name="search_value">
+		<input type="text" name="search_value" placeholder="Search">
 		<button type="submit">
 			<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<circle cx="9" cy="9" r="8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -70,7 +70,7 @@
   </div>
   <div class="catalog-page__content">
 	<aside class="filters-block">
-  
+
 	</aside>
 	<div class="products-list">
 		{% paginate collection.products by 8 %}
