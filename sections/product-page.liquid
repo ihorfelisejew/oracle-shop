@@ -1,0 +1,310 @@
+<div class="product-page__container" style="padding-top: 180px;">
+  <nav class="breadcrumbs">
+    <a href="{{ shop.url }}">Home</a>
+
+    {% if collection %}
+      <span class="separator">&gt;</span>
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+    {% endif %}
+
+    <span class="separator">&gt;</span>
+    <span class="current-page">{{ product.title }}</span>
+  </nav>
+
+  <div class="product-page__content">
+    <div class="product__gallery">
+      <div class="product__main-image">
+        <img
+          src="{{ product.featured_image | img_url: '800x' }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          id="ProductMainImage"
+          loading="lazy"
+          width="800"
+          height="{{ 800 | divided_by: product.featured_image.aspect_ratio | round }}">
+      </div>
+
+      {% if product.images.size > 1 %}
+        <div class="product__thumbnails">
+          {% for image in product.images %}
+            <div class="thumbnail__item">
+              <img
+                src="{{ image | img_url: '150x' }}"
+                alt="{{ image.alt | escape }}"
+                data-main-image="{{ image | img_url: '800x' }}"
+                loading="lazy"
+                width="150"
+                height="{{ 150 | divided_by: image.aspect_ratio | round }}"
+                onclick="changeMainImage(this)">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="product__info">
+      <h1 class="product__title">{{ product.title }}</h1>
+
+      <div class="product__price">
+        <span class="current-price">{{ product.price | money }}</span>
+        {% if product.compare_at_price > product.price %}
+          <span class="old-price">{{ product.compare_at_price | money }}</span>
+          <span class="discount-badge">
+            {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% OFF
+          </span>
+        {% endif %}
+      </div>
+
+      {% if product.variants.size > 1 %}
+        <div class="product__variants">
+          <label for="product-variant">Select option:</label>
+          <select id="product-variant" name="id">
+            {% for variant in product.variants %}
+              <option
+                value="{{ variant.id }}"
+                {% if variant.available == false %}
+                disabled{% endif %}
+                {% if variant == product.selected_or_first_available_variant %}
+                selected{% endif %}>
+                {{ variant.title }} - {{ variant.price | money }}
+                {% if variant.available == false %}(Sold Out){% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      {% else %}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ product.selected_or_first_available_variant.id }}">
+      {% endif %}
+
+      <div class="product__quantity">
+        <label for="quantity">Quantity:</label>
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          value="1"
+          min="1">
+      </div>
+
+      <div class="product__actions">
+        <button
+          type="button"
+          class="add-to-cart-btn"
+          id="add-to-cart">
+          {% if product.available %}
+            Add to Cart - {{ product.price | money }}
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+
+        {% if section.settings.show_wishlist %}
+          <button type="button" class="wishlist-btn">♡ Add to Wishlist</button>
+        {% endif %}
+      </div>
+
+      <div class="product__description">
+        <h3>Description</h3>
+        <div class="description-content">
+          {{ product.description }}
+        </div>
+      </div>
+
+      {% if product.metafields.custom.additional_info %}
+        <div class="product__additional-info">
+          <h3>Additional Information</h3>
+          <div class="additional-info-content">
+            {{ product.metafields.custom.additional_info | metafield_tag }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_share_buttons %}
+        <div class="product__share">
+          <h3>Share this product</h3>
+          <div class="share-buttons">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}" target="_blank">Facebook</a>
+            <a href="https://twitter.com/intent/tweet?text=Check out {{ product.title | url_encode }}&url={{ shop.url | append: product.url | url_encode }}" target="_blank">Twitter</a>
+            <a href="https://pinterest.com/pin/create/button/?url={{ shop.url | append: product.url | url_encode }}&media={{ product.featured_image | img_url: '800x' | url_encode }}&description={{ product.title | url_encode }}" target="_blank">Pinterest</a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.show_related_products %}
+    <div class="related-products">
+      <h2>You may also like</h2>
+      <div class="related-products__grid">
+        {% for related_product in collections.all.products limit: 4 %}
+          {% if related_product.handle != product.handle %}
+            <div class="related-product__item">
+              <a href="{{ related_product.url }}">
+                <img
+                  src="{{ related_product.featured_image | img_url: '300x' }}"
+                  alt="{{ related_product.title | escape }}"
+                  loading="lazy"
+                  width="300"
+                  height="{{ 300 | divided_by: related_product.featured_image.aspect_ratio | round }}">
+                <h4>{{ related_product.title }}</h4>
+                <p>{{ related_product.price | money }}</p>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  function changeMainImage(thumbnail) {
+  const mainImage = document.getElementById('ProductMainImage');
+  mainImage.src = thumbnail.getAttribute('data-main-image');
+  mainImage.alt = thumbnail.alt;
+  }
+
+  document.getElementById('add-to-cart').addEventListener('click', function() {
+  const variantId = document.getElementById('product-variant')?.value || '{{ product.selected_or_first_available_variant.id }}';
+  const quantity = document.getElementById('quantity').value;
+  
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: parseInt(quantity)
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Оновлення кошика
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+      // Тут можна оновити віджет кошика
+      alert('Product added to cart!');
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error adding product to cart');
+  });
+  });
+</script>
+
+<style>
+  .product-page__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+
+  .product__gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product__thumbnails {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .thumbnail__item {
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  .thumbnail__item:hover {
+    border-color: #000;
+  }
+
+  .product__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product__price {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 10px;
+  }
+
+  .discount-badge {
+    background: #ff4444;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-size: 0.8em;
+  }
+
+  .add-to-cart-btn {
+    background: #000;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+  }
+
+  .add-to-cart-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  .related-products__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .product-page__content {
+      grid-template-columns: 1fr;
+    }
+
+    .related-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Product page",
+    "tag": "section",
+    "class": "section-product",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_wishlist",
+        "label": "Show wishlist button",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show share buttons",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_related_products",
+        "label": "Show related products",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

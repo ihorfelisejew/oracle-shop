@@ -1,4 +1,4 @@
-<div class="catalog-page__content" style="padding-top: 120px;">
+<div class="catalog-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
     <a href="{{ shop.url }}">Home</a>
 
@@ -34,111 +34,94 @@
       {% if found %}
         {% assign crumbs = breadcrumb_links | split: " / " %}
         {% assign urls = breadcrumb_urls | split: "," %}
+        {% assign last_index = crumbs.size | minus: 1 %}
+
         {% for crumb in crumbs %}
           {% assign index = forloop.index0 %}
-          {% if index < crumbs.size - 1 %}
+          <span class="separator">
+            &gt;
+          </span>
+          {% if index < last_index %}
             <a href="{{ urls[index] }}">{{ crumb }}</a>
-            /
           {% else %}
-            {{ crumb }}
+            <span class="current-page">
+              {{ crumb }}
+            </span>
           {% endif %}
         {% endfor %}
         {% break %}
       {% endif %}
     {% endfor %}
   </nav>
-  <h1>{{ collection.title }}</h1>
-
+  <h1 class="catalog-page__title page__title">{{ collection.title }}</h1>
   {% if section.settings.show_description %}
-    <p>{{ collection.description }}</p>
+    <p class="collection-description">{{ collection.description }}</p>
   {% endif %}
-
-  <div class="products-grid">
-    {% for product in collection.products %}
-      <div class="product-item">
-        <a href="{{ product.url }}">
-          <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
-          <h2>{{ product.title }}</h2>
-          <p>{{ product.price | money }}</p>
-        </a>
-      </div>
-    {% else %}
-      <p>No products found in this collection.</p>
-    {% endfor %}
+  <div class="catalog-page__header">
+  	<form class="search-form">
+		<input type="text" name="search_value" placeholder="Search">
+		<button type="submit">
+			<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="9" cy="9" r="8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M15.0183 15.4851L18.5423 19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</button>
+	</form>
   </div>
+  <div class="catalog-page__content">
+	<aside class="filters-block">
+		<button class="submit-filters btn">
+			Filter
+		</button>
+	</aside>
+	<div class="products-list">
+		{% paginate collection.products by 8 %}
+		{% for product_item in collection.products %}
+			<div class="product-list__item">
+			<a href="{{ product_item.url }}" class="image__block">
+				{%- if product_item.tags contains 'New' -%}
+				<span class="product__label">New</span>
+				{%- endif -%}
+				<img
+				src="{{ product_item.featured_image | img_url: '300x' }}"
+				alt="{{ product_item.title | escape }}"
+				loading="lazy"
+				width="300"
+				height="{{ 300 | divided_by: product_item.featured_image.aspect_ratio | round }}">
+				<span class="view-more">View More</span>
+			</a>
+			<a href="{{ product_item.url }}" class="product__name">{{ product_item.title }}</a>
+			<p class="product__price">
+				{{ product_item.price | money }}
+				{%- if product_item.compare_at_price > product_item.price -%}
+				<span class="old-price">{{ product_item.compare_at_price | money }}</span>
+				{%- endif -%}
+			</p>
+			</div>
+		{% endfor %}
+
+		{% if paginate.pages > 1 %}
+			<div class="pagination">
+			{% if paginate.previous %}
+				<a href="{{ paginate.previous.url }}">Previous</a>
+			{% endif %}
+
+			{% for part in paginate.parts %}
+				{% if part.is_link %}
+				<a href="{{ part.url }}">{{ part.title }}</a>
+				{% else %}
+				<span>{{ part.title }}</span>
+				{% endif %}
+			{% endfor %}
+
+			{% if paginate.next %}
+				<a href="{{ paginate.next.url }}">Next</a>
+			{% endif %}
+			</div>
+		{% endif %}
+
+		{% endpaginate %}
+	</div>
+  </div>
+  
 </div>
-
-
-<style>
-  .products-grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat({{ section.settings.products_per_row_desktop }}, 1fr);
-  }
-
-  @media (max-width: 1024px) {
-    .products-grid {
-      grid-template-columns: repeat({{ section.settings.products_per_row_tablet }}, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .products-grid {
-      grid-template-columns: repeat({{ section.settings.products_per_row_mobile }}, 1fr);
-    }
-  }
-</style>
-
-{% schema %}
-  {
-    "name": "Collection template",
-    "tag": "section",
-    "class": "section-collection",
-    "settings": [
-      {
-        "type": "text",
-        "id": "custom_heading",
-        "label": "Custom heading",
-        "default": "Our collection"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_description",
-        "label": "Show collection description",
-        "default": true
-      },
-      {
-        "type": "range",
-        "id": "products_per_row_desktop",
-        "min": 2,
-        "max": 6,
-        "step": 1,
-        "label": "Products per row (Desktop)",
-        "default": 4
-      },
-      {
-        "type": "range",
-        "id": "products_per_row_tablet",
-        "min": 1,
-        "max": 4,
-        "step": 1,
-        "label": "Products per row (Tablet)",
-        "default": 2
-      }, {
-        "type": "range",
-        "id": "products_per_row_mobile",
-        "min": 1,
-        "max": 3,
-        "step": 1,
-        "label": "Products per row (Mobile)",
-        "default": 1
-      }
-    ],
-    "presets": [
-      {
-        "name": "Custom Collection",
-        "category": "Collection"
-      }
-    ]
-  }
-{% endschema %}
