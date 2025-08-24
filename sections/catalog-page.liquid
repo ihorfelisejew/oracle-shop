@@ -34,9 +34,11 @@
       {% if found %}
         {% assign crumbs = breadcrumb_links | split: " / " %}
         {% assign urls = breadcrumb_urls | split: "," %}
+        {% assign last_index = crumbs.size | minus: 1 %}
+
         {% for crumb in crumbs %}
           {% assign index = forloop.index0 %}
-          {% if index < crumbs.size - 1 %}
+          {% if index < last_index %}
             <a href="{{ urls[index] }}">{{ crumb }}</a>
             /
           {% else %}
