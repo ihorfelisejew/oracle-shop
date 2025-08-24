@@ -1,51 +1,18 @@
 <div class="product-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
-    <a href="{{ shop.url }}">Home
-  </a>
+    <a href="{{ shop.url }}">Home</a>
 
-    {% comment %} Шукаємо поточну колекцію в меню з усіма рівнями вкладеності {% endcomment %}
-    {% assign found_path = nil %}
-
-      {% for link in linklists.main-menu.links %}
-      {% comment %} Перевіряємо перший рівень {% endcomment %}
-      {% if link.title == collection.title %}
-        {% assign found_path = link.title %}
-        {% assign found_urls = link.url %}
-        {% else %}
-        {% comment %} Перевіряємо другий рівень {% endcomment %}
-        {% for child in link.links %}
-          {% if child.title == collection.title %}
-            {% assign found_path = link.title | append: "|||" | append: child.title %}
-            {% assign found_urls = link.url | append: "|||" | append: child.url %}
-            {% else %}
-            {% comment %} Перевіряємо третій рівень {% endcomment %}
-            {% for grandchild in child.links %}
-              {% if grandchild.title == collection.title %}
-                {% assign found_path = link.title | append: "|||" | append: child.title | append: "|||" | append: grandchild.title %}
-                {% assign found_urls = link.url | append: "|||" | append: child.url | append: "|||" | append: grandchild.url %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      {% if found_path %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-
-    {% comment %} Виводимо знайдений шлях {% endcomment %}
-    {% if found_path %}
-      {% assign crumbs = found_path | split: "|||" %}
-      {% assign urls = found_urls | split: "|||" %}
-
-      {% for crumb in crumbs %}
+    {% if collection %}
+      {% comment %} Перевіряємо чи є батьківські колекції {% endcomment %}
+      {% if collection.parent %}
         <span class="separator">&gt;</span>
-        <a href="{{ urls[forloop.index0] }}">{{ crumb }}</a>
-      {% endfor %}
+        <a href="{{ collection.parent.url }}">{{ collection.parent.title }}</a>
+      {% endif %}
+
+      <span class="separator">&gt;</span>
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
     {% endif %}
 
-    {% comment %} Додаємо назву товару {% endcomment %}
     <span class="separator">&gt;</span>
     <span class="current-page">{{ product.title }}</span>
   </nav>
