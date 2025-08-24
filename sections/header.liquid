@@ -1,4 +1,7 @@
-<header class="header">
+<header class="header 
+	{% if request.page_type != 'index' %}
+    	not-home-header
+  	{% endif %}">
   <div class="header__menu-background"></div>
   <div class="shipping-notice__wrapper">
     <p class="shipping__notice" style="background-color: {{ section.settings.shipping_notice_bg }}; color: {{ section.settings.shipping_notice_text_color }};">
@@ -12,10 +15,12 @@
       </div>
       <div class="header__info">
         <a href="#" class="header__logo">
-          <img
-            src="{{ section.settings.header_logo-white | img_url: '300x' }}"
-            alt="ORACLE"
-            class="header__logo-image white">
+          {% if request.page_type == 'index' %}
+            <img
+              src="../img/logo.png"
+              alt="ORACLE"
+              class="header__logo-image white">
+          {% endif %}
           <img
             src="{{ section.settings.header_logo-dark | img_url: '300x' }}"
             alt="ORACLE"
