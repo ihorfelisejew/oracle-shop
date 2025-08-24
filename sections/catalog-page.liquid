@@ -1,9 +1,7 @@
 <div class="catalog-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
     <a href="{{ shop.url }}">Home</a>
-    <span class="separator">
-      &gt;
-    </span>
+
     {% assign current_name = collection.title | default: product.title %}
     {% assign breadcrumb_links = "" %}
     {% assign breadcrumb_urls = "" %}
@@ -60,32 +58,54 @@
     <p class="collection-description">{{ collection.description }}</p>
   {% endif %}
   <div class="products-list">
-    {% for product in collection.products %}
-      <div class="product-list__item">
-        <a href="{{ product.url }}" class="image__block">
-          {%- if product.tags contains 'New' -%}
-            <span class="product__label">New</span>
-          {%- endif -%}
-          <img
-            src="{{ product.featured_image | img_url: '300x' }}"
-            alt="{{ product.title | escape }}"
-            loading="lazy"
-            width="300"
-            height="{{ 300 | divided_by: product.featured_image.aspect_ratio | round }}">
-          <span class="view-more">View More</span>
-        </a>
-        <a href="{{ product.url }}" class="product__name">{{ product.title }}</a>
-        <p class="product__price">
-          {{ product.price | money }}
-          {%- if product.compare_at_price > product.price -%}
-            <span class="old-price">{{ product.compare_at_price | money }}</span>
-          {%- endif -%}
-        </p>
-      </div>
-    {% else %}
-      <p class="no-products">No products found in this collection.</p>
-    {% endfor %}
+    {% paginate collection.products by 12 %}
+      {% for product in paginate.items %}
+        <div class="product-list__item">
+          <a href="{{ product.url }}" class="image__block">
+            {%- if product.tags contains 'New' -%}
+              <span class="product__label">New</span>
+            {%- endif -%}
+            <img
+              src="{{ product.featured_image | img_url: '300x' }}"
+              alt="{{ product.title | escape }}"
+              loading="lazy"
+              width="300"
+              height="{{ 300 | divided_by: product.featured_image.aspect_ratio | round }}">
+            <span class="view-more">View More</span>
+          </a>
+          <a href="{{ product.url }}" class="product__name">{{ product.title }}</a>
+          <p class="product__price">
+            {{ product.price | money }}
+            {%- if product.compare_at_price > product.price -%}
+              <span class="old-price">{{ product.compare_at_price | money }}</span>
+            {%- endif -%}
+          </p>
+        </div>
+      {% endfor %}
+
+      {% if paginate.pages > 1 %}
+        <div class="pagination">
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}" class="prev">&lt; Previous</a>
+          {% endif %}
+
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a href="{{ part.url }}">{{ part.title }}</a>
+            {% else %}
+              <span class="current">{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}" class="next">Next &gt;</a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% endpaginate %}
   </div>
+
 </div>
 
 
