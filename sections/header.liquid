@@ -1,5 +1,4 @@
-<header class="header 
-	{% if request.page_type != 'index' %}
+<header class="header {% if request.page_type != 'index' %}
     	not-home-header
   	{% endif %}">
   <div class="header__menu-background"></div>
@@ -17,7 +16,7 @@
         <a href="#" class="header__logo">
           {% if request.page_type == 'index' %}
             <img
-              src="../img/logo.png"
+              src="{{ section.settings.header_logo-white | img_url: '300x' }}"
               alt="ORACLE"
               class="header__logo-image white">
           {% endif %}
