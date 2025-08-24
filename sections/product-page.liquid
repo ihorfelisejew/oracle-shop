@@ -1,29 +1,3 @@
-{% schema %}
-  {
-    "name": "Product page",
-    "tag": "section",
-    "class": "section-product",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_wishlist",
-        "label": "Show wishlist button",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_share_buttons",
-        "label": "Show share buttons",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_related_products",
-        "label": "Show related products",
-        "default": true
-      }
-    ]
-  }
-{% endschema %}
-
 <div class="product-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
     <a href="{{ shop.url }}">Home</a>
@@ -31,6 +5,20 @@
     {% if collection %}
       <span class="separator">&gt;</span>
       <a href="{{ collection.url }}">{{ collection.title }}</a>
+
+      {% comment %} Перевіряємо чи є батьківські колекції {% endcomment %}
+      {% if collection.parent %}
+        {% assign parent_collection = collection.parent %}
+        <span class="separator">&gt;</span>
+        <a href="{{ parent_collection.url }}">{{ parent_collection.title }}</a>
+
+        {% comment %} Перевіряємо чи є додаткові рівні вкладеності {% endcomment %}
+        {% if parent_collection.parent %}
+          {% assign grandparent_collection = parent_collection.parent %}
+          <span class="separator">&gt;</span>
+          <a href="{{ grandparent_collection.url }}">{{ grandparent_collection.title }}</a>
+        {% endif %}
+      {% endif %}
     {% endif %}
 
     <span class="separator">&gt;</span>
@@ -308,3 +296,30 @@
   });
   });
 </script>
+
+
+{% schema %}
+  {
+    "name": "Product page",
+    "tag": "section",
+    "class": "section-product",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_wishlist",
+        "label": "Show wishlist button",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show share buttons",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_related_products",
+        "label": "Show related products",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}
