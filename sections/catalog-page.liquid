@@ -57,52 +57,69 @@
   {% if section.settings.show_description %}
     <p class="collection-description">{{ collection.description }}</p>
   {% endif %}
-  <div class="products-list">
-    {% paginate collection.products by 8 %}
-      {% for product_item in collection.products %}
-        <div class="product-list__item">
-          <a href="{{ product_item.url }}" class="image__block">
-            {%- if product_item.tags contains 'New' -%}
-              <span class="product__label">New</span>
-            {%- endif -%}
-            <img
-              src="{{ product_item.featured_image | img_url: '300x' }}"
-              alt="{{ product_item.title | escape }}"
-              loading="lazy"
-              width="300"
-              height="{{ 300 | divided_by: product_item.featured_image.aspect_ratio | round }}">
-            <span class="view-more">View More</span>
-          </a>
-          <a href="{{ product_item.url }}" class="product__name">{{ product_item.title }}</a>
-          <p class="product__price">
-            {{ product_item.price | money }}
-            {%- if product_item.compare_at_price > product_item.price -%}
-              <span class="old-price">{{ product_item.compare_at_price | money }}</span>
-            {%- endif -%}
-          </p>
-        </div>
-      {% endfor %}
-
-      {% if paginate.pages > 1 %}
-        <div class="pagination">
-          {% if paginate.previous %}
-            <a href="{{ paginate.previous.url }}">Previous</a>
-          {% endif %}
-
-          {% for part in paginate.parts %}
-            {% if part.is_link %}
-              <a href="{{ part.url }}">{{ part.title }}</a>
-            {% else %}
-              <span>{{ part.title }}</span>
-            {% endif %}
-          {% endfor %}
-
-          {% if paginate.next %}
-            <a href="{{ paginate.next.url }}">Next</a>
-          {% endif %}
-        </div>
-      {% endif %}
-
-    {% endpaginate %}
+  <div class="catalog-page__header">
+  	<form class="search-form">
+		<input type="text" name="search_value">
+		<button type="submit">
+			<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="9" cy="9" r="8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M15.0183 15.4851L18.5423 19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</button>
+	</form>
   </div>
+  <div class="catalog-page__content">
+	<aside class="filters-block">
+  
+	</aside>
+	<div class="products-list">
+		{% paginate collection.products by 8 %}
+		{% for product_item in collection.products %}
+			<div class="product-list__item">
+			<a href="{{ product_item.url }}" class="image__block">
+				{%- if product_item.tags contains 'New' -%}
+				<span class="product__label">New</span>
+				{%- endif -%}
+				<img
+				src="{{ product_item.featured_image | img_url: '300x' }}"
+				alt="{{ product_item.title | escape }}"
+				loading="lazy"
+				width="300"
+				height="{{ 300 | divided_by: product_item.featured_image.aspect_ratio | round }}">
+				<span class="view-more">View More</span>
+			</a>
+			<a href="{{ product_item.url }}" class="product__name">{{ product_item.title }}</a>
+			<p class="product__price">
+				{{ product_item.price | money }}
+				{%- if product_item.compare_at_price > product_item.price -%}
+				<span class="old-price">{{ product_item.compare_at_price | money }}</span>
+				{%- endif -%}
+			</p>
+			</div>
+		{% endfor %}
+
+		{% if paginate.pages > 1 %}
+			<div class="pagination">
+			{% if paginate.previous %}
+				<a href="{{ paginate.previous.url }}">Previous</a>
+			{% endif %}
+
+			{% for part in paginate.parts %}
+				{% if part.is_link %}
+				<a href="{{ part.url }}">{{ part.title }}</a>
+				{% else %}
+				<span>{{ part.title }}</span>
+				{% endif %}
+			{% endfor %}
+
+			{% if paginate.next %}
+				<a href="{{ paginate.next.url }}">Next</a>
+			{% endif %}
+			</div>
+		{% endif %}
+
+		{% endpaginate %}
+	</div>
+  </div>
+  
 </div>
