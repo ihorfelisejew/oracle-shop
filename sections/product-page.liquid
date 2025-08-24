@@ -2,17 +2,13 @@
   <nav class="breadcrumbs">
     <a href="{{ shop.url }}">Home</a>
 
+    {% comment %} Завжди показуємо колекцію, якщо вона є {% endcomment %}
     {% if collection %}
-      {% comment %} Перевіряємо чи є батьківські колекції {% endcomment %}
-      {% if collection.parent %}
-        <span class="separator">&gt;</span>
-        <a href="{{ collection.parent.url }}">{{ collection.parent.title }}</a>
-      {% endif %}
-
       <span class="separator">&gt;</span>
       <a href="{{ collection.url }}">{{ collection.title }}</a>
     {% endif %}
 
+    {% comment %} Додаємо назву товару {% endcomment %}
     <span class="separator">&gt;</span>
     <span class="current-page">{{ product.title }}</span>
   </nav>
