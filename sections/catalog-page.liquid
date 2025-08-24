@@ -2,24 +2,24 @@
   <nav class="breadcrumbs">
     <a href="{{ shop.url }}">Home</a>
 
-    {% assign current_url = collection.url | default: product.url %}
+    {% assign current_name = collection.title | default: product.title %}
     {% assign breadcrumb_links = "" %}
 
     {% for link in linklists.main-menu.links %}
       {% assign found = false %}
 
-      {% if link.url == current_url %}
+      {% if link.title == current_name %}
         {% assign breadcrumb_links = link.title %}
         {% assign found = true %}
       {% else %}
         {% for child in link.links %}
-          {% if child.url == current_url %}
+          {% if child.title == current_name %}
             {% assign breadcrumb_links = link.title | append: " / " | append: child.title %}
             {% assign found = true %}
           {% else %}
-            {% for grandchild_link in child.links %}
-              {% if grandchild_link.url == current_url %}
-                {% assign breadcrumb_links = link.title | append: " / " | append: child.title | append: " / " | append: grandchild_link.title %}
+            {% for grandchild in child.links %}
+              {% if grandchild.title == current_name %}
+                {% assign breadcrumb_links = link.title | append: " / " | append: child.title | append: " / " | append: grandchild.title %}
                 {% assign found = true %}
               {% endif %}
             {% endfor %}
