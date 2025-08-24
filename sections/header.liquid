@@ -13,11 +13,11 @@
       <div class="header__info">
         <a href="#" class="header__logo">
           <img
-            src="../img/logo.png"
+            src="{{ section.settings.header_logo-white }}"
             alt="ORACLE"
             class="header__logo-image white">
           <img
-            src="../img/logo-dark.png"
+            src="{{ section.settings.header_logo-dark }}"
             alt="ORACLE"
             class="header__logo-image dark">
         </a>
@@ -224,11 +224,15 @@
         "default": "#ffffff"
       }, {
         "type": "header",
-        "content": "Logo"
+        "content": "Logo Images"
       }, {
         "type": "image_picker",
-        "id": "header_logo",
-        "label": "Logo image"
+        "id": "header_logo-white",
+        "label": "White logo"
+      }, {
+        "type": "image_picker",
+        "id": "header_logo-dark",
+        "label": "Dark logo"
       }, {
         "type": "header",
         "content": "Right Buttons"
