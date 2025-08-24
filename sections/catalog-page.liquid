@@ -61,7 +61,7 @@
   {% endif %}
   <div class="products-list">
     {% for product in collection.products %}
-      <div class="product-item">
+      <div class="product-list__item">
         <a href="{{ product.url }}">
           <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
           <h2>{{ product.title }}</h2>
