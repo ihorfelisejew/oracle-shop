@@ -16,7 +16,12 @@
       "settings": {
         "shipping_notice_text": "Free worldwide shipping for orders over $200",
         "shipping_notice_bg": "#000000",
-        "shipping_notice_text_color": "#ffffff"
+        "shipping_notice_text_color": "#ffffff",
+        "header_logo-white": "shopify://shop_images/logo.png",
+        "header_logo-dark": "shopify://shop_images/logo-dark.png",
+        "show_search": true,
+        "show_account": true,
+        "show_cart": true
       }
     }
   },
