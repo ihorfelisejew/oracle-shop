@@ -1,56 +1,53 @@
 <div class="product-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
-    <a href="{{ shop.url }}">Home</a>
+    <a href="{{ shop.url }}">Home
+  </a>
 
-    {% assign current_name = collection.title | default: product.title %}
-    {% assign breadcrumb_links = "" %}
-    {% assign breadcrumb_urls = "" %}
+    {% comment %} Шукаємо поточну колекцію в меню з усіма рівнями вкладеності {% endcomment %}
+    {% assign found_path = nil %}
 
-    {% for link in linklists.main-menu.links %}
-      {% assign found = false %}
-
-      {% if link.title == current_name %}
-        {% assign breadcrumb_links = link.title %}
-        {% assign breadcrumb_urls = "" %}
-        {% assign found = true %}
-      {% else %}
+      {% for link in linklists.main-menu.links %}
+      {% comment %} Перевіряємо перший рівень {% endcomment %}
+      {% if link.title == collection.title %}
+        {% assign found_path = link.title %}
+        {% assign found_urls = link.url %}
+        {% else %}
+        {% comment %} Перевіряємо другий рівень {% endcomment %}
         {% for child in link.links %}
-          {% if child.title == current_name %}
-            {% assign breadcrumb_links = link.title | append: " / " | append: child.title %}
-            {% assign breadcrumb_urls = link.url %}
-            {% assign found = true %}
-          {% else %}
+          {% if child.title == collection.title %}
+            {% assign found_path = link.title | append: "|||" | append: child.title %}
+            {% assign found_urls = link.url | append: "|||" | append: child.url %}
+            {% else %}
+            {% comment %} Перевіряємо третій рівень {% endcomment %}
             {% for grandchild in child.links %}
-              {% if grandchild.title == current_name %}
-                {% assign breadcrumb_links = link.title | append: " / " | append: child.title | append: " / " | append: grandchild.title %}
-                {% assign breadcrumb_urls = link.url | append: "," | append: child.url %}
-                {% assign found = true %}
+              {% if grandchild.title == collection.title %}
+                {% assign found_path = link.title | append: "|||" | append: child.title | append: "|||" | append: grandchild.title %}
+                {% assign found_urls = link.url | append: "|||" | append: child.url | append: "|||" | append: grandchild.url %}
               {% endif %}
             {% endfor %}
           {% endif %}
         {% endfor %}
       {% endif %}
 
-      {% if found %}
-        {% assign crumbs = breadcrumb_links | split: " / " %}
-        {% assign urls = breadcrumb_urls | split: "," %}
-        {% assign last_index = crumbs.size | minus: 1 %}
-
-        {% for crumb in crumbs %}
-          {% assign index = forloop.index0 %}
-          <span class="separator">
-            &gt;
-          </span>
-          <a href="{{ urls[index] }}">{{ crumb }}</a>
-        {% endfor %}
+      {% if found_path %}
         {% break %}
       {% endif %}
     {% endfor %}
 
+    {% comment %} Виводимо знайдений шлях {% endcomment %}
+    {% if found_path %}
+      {% assign crumbs = found_path | split: "|||" %}
+      {% assign urls = found_urls | split: "|||" %}
+
+      {% for crumb in crumbs %}
+        <span class="separator">&gt;</span>
+        <a href="{{ urls[forloop.index0] }}">{{ crumb }}</a>
+      {% endfor %}
+    {% endif %}
+
+    {% comment %} Додаємо назву товару {% endcomment %}
     <span class="separator">&gt;</span>
-    <span class="current-page">
-      {{ product.title }}
-    </span>
+    <span class="current-page">{{ product.title }}</span>
   </nav>
 
   <div class="product-page__content">
