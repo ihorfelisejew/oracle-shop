@@ -1,12 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "template-404",
+      "settings": {}
+    },
+    "catalog_page_QxTV4b": {
+      "type": "catalog-page",
+      "name": "Custom Collection",
       "settings": {
+        "custom_heading": "Our collection",
+        "show_description": true,
+        "products_per_row": 3
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "catalog_page_QxTV4b"
   ]
 }
