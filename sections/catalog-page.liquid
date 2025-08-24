@@ -1,0 +1,51 @@
+<h1>{{ collection.title }}</h1>
+<p>{{ collection.description }}</p>
+
+<div class="products-grid">
+  {% for product in collection.products %}
+    <div class="product-item">
+      <a href="{{ product.url }}">
+        <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.price | money }}</p>
+      </a>
+    </div>
+  {% else %}
+    <p>No products found in this collection.</p>
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Collection template",
+    "tag": "section",
+    "class": "section-collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_heading",
+        "label": "Custom heading",
+        "default": "Our collection"
+      }, {
+        "type": "checkbox",
+        "id": "show_description",
+        "label": "Show collection description",
+        "default": true
+      }, {
+        "type": "range",
+        "id": "products_per_row",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "label": "Products per row",
+        "default": 3
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom Collection",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}
