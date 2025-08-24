@@ -1,3 +1,29 @@
+{% schema %}
+  {
+    "name": "Product page",
+    "tag": "section",
+    "class": "section-product",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_wishlist",
+        "label": "Show wishlist button",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show share buttons",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_related_products",
+        "label": "Show related products",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}
+
 <div class="product-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
     <a href="{{ shop.url }}">Home</a>
@@ -159,44 +185,6 @@
   {% endif %}
 </div>
 
-<script>
-  function changeMainImage(thumbnail) {
-  const mainImage = document.getElementById('ProductMainImage');
-  mainImage.src = thumbnail.getAttribute('data-main-image');
-  mainImage.alt = thumbnail.alt;
-  }
-
-  document.getElementById('add-to-cart').addEventListener('click', function() {
-  const variantId = document.getElementById('product-variant')?.value || '{{ product.selected_or_first_available_variant.id }}';
-  const quantity = document.getElementById('quantity').value;
-  
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id: variantId,
-      quantity: parseInt(quantity)
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Оновлення кошика
-    fetch('/cart.js')
-    .then(response => response.json())
-    .then(cart => {
-      // Тут можна оновити віджет кошика
-      alert('Product added to cart!');
-    });
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Error adding product to cart');
-  });
-  });
-</script>
-
 <style>
   .product-page__content {
     display: grid;
@@ -283,28 +271,40 @@
   }
 </style>
 
-{% schema %}
-  {
-    "name": "Product page",
-    "tag": "section",
-    "class": "section-product",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_wishlist",
-        "label": "Show wishlist button",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_share_buttons",
-        "label": "Show share buttons",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_related_products",
-        "label": "Show related products",
-        "default": true
-      }
-    ]
+<script>
+  function changeMainImage(thumbnail) {
+  const mainImage = document.getElementById('ProductMainImage');
+  mainImage.src = thumbnail.getAttribute('data-main-image');
+  mainImage.alt = thumbnail.alt;
   }
-{% endschema %}
+
+  document.getElementById('add-to-cart').addEventListener('click', function() {
+  const variantId = document.getElementById('product-variant')?.value || '{{ product.selected_or_first_available_variant.id }}';
+  const quantity = document.getElementById('quantity').value;
+  
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: parseInt(quantity)
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Оновлення кошика
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+      // Тут можна оновити віджет кошика
+      alert('Product added to cart!');
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error adding product to cart');
+  });
+  });
+</script>
