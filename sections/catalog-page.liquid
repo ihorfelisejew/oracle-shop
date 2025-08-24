@@ -1,19 +1,82 @@
-<h1>{{ collection.title }}</h1>
-<p>{{ collection.description }}</p>
+<div class="catalog-page__content" style="padding-top: 120px;">
+  <nav class="breadcrumbs">
+    <a href="{{ shop.url }}">Home</a>
 
-<div class="products-grid">
-  {% for product in collection.products %}
-    <div class="product-item">
-      <a href="{{ product.url }}">
-        <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
-        <h2>{{ product.title }}</h2>
-        <p>{{ product.price | money }}</p>
-      </a>
-    </div>
-  {% else %}
-    <p>No products found in this collection.</p>
-  {% endfor %}
+    {% assign current_url = collection.url | default: product.url %}
+    {% assign breadcrumb_links = "" %}
+
+    {% for link in linklists.main-menu.links %}
+      {% assign found = false %}
+
+      {% if link.url == current_url %}
+        {% assign breadcrumb_links = link.title %}
+        {% assign found = true %}
+      {% else %}
+        {% for child in link.links %}
+          {% if child.url == current_url %}
+            {% assign breadcrumb_links = link.title | append: " / " | append: child.title %}
+            {% assign found = true %}
+          {% else %}
+            {% for grandchild_link in child.links %}
+              {% if grandchild_link.url == current_url %}
+                {% assign breadcrumb_links = link.title | append: " / " | append: child.title | append: " / " | append: grandchild_link.title %}
+                {% assign found = true %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if found %}
+        <span>
+          /
+        </span>
+        {{ breadcrumb_links }}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  </nav>
+  <h1>{{ collection.title }}</h1>
+
+  {% if section.settings.show_description %}
+    <p>{{ collection.description }}</p>
+  {% endif %}
+
+  <div class="products-grid">
+    {% for product in collection.products %}
+      <div class="product-item">
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
+          <h2>{{ product.title }}</h2>
+          <p>{{ product.price | money }}</p>
+        </a>
+      </div>
+    {% else %}
+      <p>No products found in this collection.</p>
+    {% endfor %}
+  </div>
 </div>
+
+
+<style>
+  .products-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat({{ section.settings.products_per_row_desktop }}, 1fr);
+  }
+
+  @media (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat({{ section.settings.products_per_row_tablet }}, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: repeat({{ section.settings.products_per_row_mobile }}, 1fr);
+    }
+  }
+</style>
 
 {% schema %}
   {
@@ -26,19 +89,38 @@
         "id": "custom_heading",
         "label": "Custom heading",
         "default": "Our collection"
-      }, {
+      },
+      {
         "type": "checkbox",
         "id": "show_description",
         "label": "Show collection description",
         "default": true
+      },
+      {
+        "type": "range",
+        "id": "products_per_row_desktop",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "label": "Products per row (Desktop)",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "products_per_row_tablet",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "Products per row (Tablet)",
+        "default": 2
       }, {
         "type": "range",
-        "id": "products_per_row",
-        "min": 2,
-        "max": 5,
+        "id": "products_per_row_mobile",
+        "min": 1,
+        "max": 2,
         "step": 1,
-        "label": "Products per row",
-        "default": 3
+        "label": "Products per row (Mobile)",
+        "default": 1
       }
     ],
     "presets": [
