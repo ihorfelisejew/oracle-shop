@@ -8,7 +8,6 @@ const menuBlock = header.querySelector(".header__menu");
 const closeButton = menuBlock.querySelector(".close__button");
 const phoneMenuBg = header.querySelector(".header__menu-background");
 function checkPageScroll() {
-  if (header.classList.contains("not-home-header")) return;
   if (window.scrollY > 0) {
     shippingNotice.style.maxHeight = "0";
     header.classList.add("scrolled");
