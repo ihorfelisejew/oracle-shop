@@ -89,8 +89,8 @@
 
         <p class="product__price">${{ product.price | money }}</p>
 
-        {% if product.variants.size > 1 %}
-          <div class="product__variants">
+        <div class="product__options">
+          {% if product.variants.size > 1 %}
             <label for="product-variant">Choose Size:</label>
             <select id="product-variant" name="id">
               {% for variant in product.variants %}
@@ -100,27 +100,29 @@
                   disabled{% endif %}
                   {% if variant == product.selected_or_first_available_variant %}
                   selected{% endif %}>
-                  {{ variant.title }} - {{ variant.price | money }}
+                  {{ variant.title }}
                   {% if variant.available == false %}(Sold Out){% endif %}
                 </option>
               {% endfor %}
             </select>
-          </div>
-        {% else %}
-          <input
-            type="hidden"
-            name="id"
-            value="{{ product.selected_or_first_available_variant.id }}">
-        {% endif %}
+          {% else %}
+            <input
+              type="hidden"
+              name="id"
+              value="{{ product.selected_or_first_available_variant.id }}">
+          {% endif %}
 
-        <div class="product__quantity">
           <label for="quantity">Quantity:</label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            value="1"
-            min="1">
+          <div class="quantity__block">
+            <button class="decrease__button">-</button>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              value="1"
+              min="1">
+            <button class="increase__button">-</button>
+          </div>
         </div>
 
         <div class="product__actions">
@@ -197,6 +199,23 @@
 </div>
 
 <script>
+  	document.addEventListener("DOMContentLoaded", () => {
+    const decreaseBtn = document.querySelector(".decrease__button");
+    const increaseBtn = document.querySelector(".increase__button");
+    const quantityInput = document.getElementById("quantity");
+
+    decreaseBtn.addEventListener("click", () => {
+      let currentValue = parseInt(quantityInput.value) || 1;
+      if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+      }
+    });
+
+    increaseBtn.addEventListener("click", () => {
+      let currentValue = parseInt(quantityInput.value) || 1;
+      quantityInput.value = currentValue + 1;
+    });
+  });
   document.getElementById('add-to-cart').addEventListener('click', function() {
   const variantId = document.getElementById('product-variant')?.value || '{{ product.selected_or_first_available_variant.id }}';
   const quantity = document.getElementById('quantity').value;
