@@ -18,16 +18,16 @@
       {% for child in link.links %}
         {% for collection in collections %}
           {% if collection.title == child.title and product.collections contains collection %}
-            {% assign breadcrumbs = breadcrumbs | append: "," | append: link.title | append: "," | append: child.title %}
-            {% assign urls = urls | append: "," | append: link.url | append: "," | append: child.url %}
+            {% assign breadcrumbs = breadcrumbs | append: "," | append: child.title %}
+            {% assign urls = urls | append: "," | append: child.url %}
           {% endif %}
         {% endfor %}
 
         {% for grandchild in child.links %}
           {% for collection in collections %}
             {% if collection.title == grandchild.title and product.collections contains collection %}
-              {% assign breadcrumbs = breadcrumbs | append: "," | append: link.title | append: "," | append: child.title | append: "," | append: grandchild.title %}
-              {% assign urls = urls | append: "," | append: link.url | append: "," | append: child.url | append: "," | append: grandchild.url %}
+              {% assign breadcrumbs = breadcrumbs | append: "," | append: grandchild.title %}
+              {% assign urls = urls | append: "," | append: grandchild.url %}
             {% endif %}
           {% endfor %}
         {% endfor %}
