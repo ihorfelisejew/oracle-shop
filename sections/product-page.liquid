@@ -82,9 +82,9 @@
       <div class="product__info">
         <h1 class="product__title">{{ product.title }}</h1>
         {% if product.available %}
-          <p class="in-stock">Є в наявності</p>
+          <p class="in-stock">In Stock</p>
         {% else %}
-          <p class="out-of-stock">Немає в наявності</p>
+          <p class="out-of-stock">Not In Stock</p>
         {% endif %}
 
         <p class="product__price">${{ product.price | money }}</p>
