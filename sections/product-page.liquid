@@ -1,10 +1,21 @@
 <div class="product-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
-    <a href="{{ shop.url }}">Home</a>
+    <a href="{{ shop.url }}">Home
+  </a>
 
-    {% if collection %}
+    {% comment %} Беремо першу колекцію, яка не є 'all' {% endcomment %}
+    {% assign main_collection = nil %}
+
+    {% for coll in product.collections %}
+      {% if coll.handle != 'all' and coll.handle != 'frontpage' %}
+        {% assign main_collection = coll %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if main_collection %}
       <span class="separator">&gt;</span>
-      <a href="{{ collection.url }}">{{ collection.title }}</a>
+      <a href="{{ main_collection.url }}">{{ main_collection.title }}</a>
     {% endif %}
 
     <span class="separator">&gt;</span>
