@@ -4,12 +4,14 @@
 
     {% assign breadcrumbs = "" %}
     {% assign urls = "" %}
+    {% assign find_collection = false %}
 
     {% for link in linklists.main-menu.links %}
       {% for collection in collections %}
         {% if collection.title == link.title and product.collections contains collection %}
           {% assign breadcrumbs = breadcrumbs | append: link.title %}
           {% assign urls = urls | append: link.url %}
+          {% assign find_collection = true %}
         {% endif %}
       {% endfor %}
 
@@ -30,6 +32,10 @@
           {% endfor %}
         {% endfor %}
       {% endfor %}
+
+      {% if find_collection %}
+        {% break %}
+      {% endif %}
     {% endfor %}
 
     {% assign crumbs = breadcrumbs | split: "," %}
@@ -49,7 +55,6 @@
     <span class="separator">&gt;</span>
     <span class="current-page">{{ product.title }}</span>
   </nav>
-
 
   <div class="product-page__content">
     <div class="product__gallery">
