@@ -9,8 +9,8 @@
     {% for link in linklists.main-menu.links %}
       {% for collection in collections %}
         {% if collection.title == link.title and product.collections contains collection %}
-          {% assign breadcrumbs = breadcrumbs | append: link.title %}
-          {% assign urls = urls | append: link.url %}
+          {% assign breadcrumbs = link.title %}
+          {% assign urls = link.url %}
           {% assign find_collection = true %}
         {% endif %}
       {% endfor %}
