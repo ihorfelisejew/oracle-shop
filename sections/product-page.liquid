@@ -1,37 +1,56 @@
-{% schema %}
-  {
-    "name": "Product page",
-    "tag": "section",
-    "class": "section-product",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_wishlist",
-        "label": "Show wishlist button",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_share_buttons",
-        "label": "Show share buttons",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_related_products",
-        "label": "Show related products",
-        "default": true
-      }
-    ]
-  }
-{% endschema %}
-
 <div class="product-page__container" style="padding-top: 180px;">
   <nav class="breadcrumbs">
     <a href="{{ shop.url }}">Home</a>
 
-    {% if collection %}
+    {% assign breadcrumbs = "" %}
+    {% assign urls = "" %}
+    {% assign find_collection = false %}
+
+    {% for link in linklists.main-menu.links %}
+      {% for collection in collections %}
+        {% if collection.title == link.title and product.collections contains collection %}
+          {% assign breadcrumbs = link.title %}
+          {% assign urls = link.url %}
+          {% assign find_collection = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% for child in link.links %}
+        {% for collection in collections %}
+          {% if collection.title == child.title and product.collections contains collection %}
+            {% assign breadcrumbs = breadcrumbs | append: "," | append: child.title %}
+            {% assign urls = urls | append: "," | append: child.url %}
+          {% endif %}
+        {% endfor %}
+
+        {% for grandchild in child.links %}
+          {% for collection in collections %}
+            {% if collection.title == grandchild.title and product.collections contains collection %}
+              {% assign breadcrumbs = breadcrumbs | append: "," | append: grandchild.title %}
+              {% assign urls = urls | append: "," | append: grandchild.url %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+
+      {% if find_collection %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign crumbs = breadcrumbs | split: "," %}
+    {% assign crumb_urls = urls | split: "," %}
+    {% assign last_index = crumbs.size | minus: 1 %}
+
+    {% for crumb in crumbs %}
       <span class="separator">&gt;</span>
-      <a href="{{ collection.url }}">{{ collection.title }}</a>
-    {% endif %}
+      {% assign index = forloop.index0 %}
+      {% if index < last_index %}
+        <a href="{{ crumb_urls[index] }}">{{ crumb }}</a>
+      {% else %}
+        <span class="current-page">{{ crumb }}</span>
+      {% endif %}
+    {% endfor %}
 
     <span class="separator">&gt;</span>
     <span class="current-page">{{ product.title }}</span>
@@ -308,3 +327,30 @@
   });
   });
 </script>
+
+
+{% schema %}
+  {
+    "name": "Product page",
+    "tag": "section",
+    "class": "section-product",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_wishlist",
+        "label": "Show wishlist button",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show share buttons",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_related_products",
+        "label": "Show related products",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}
