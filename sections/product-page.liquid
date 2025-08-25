@@ -45,11 +45,7 @@
     {% for crumb in crumbs %}
       <span class="separator">&gt;</span>
       {% assign index = forloop.index0 %}
-      {% if index < last_index %}
-        <a href="{{ crumb_urls[index] }}">{{ crumb }}</a>
-      {% else %}
-        <span class="current-page">{{ crumb }}</span>
-      {% endif %}
+      <a href="{{ crumb_urls[index] }}">{{ crumb }}</a>
     {% endfor %}
 
     <span class="separator">&gt;</span>
