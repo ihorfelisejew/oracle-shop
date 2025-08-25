@@ -81,20 +81,17 @@
       </div>
       <div class="product__info">
         <h1 class="product__title">{{ product.title }}</h1>
+        {% if product.available %}
+          <p class="in-stock">Є в наявності</p>
+        {% else %}
+          <p class="out-of-stock">Немає в наявності</p>
+        {% endif %}
 
-        <div class="product__price">
-          <span class="current-price">{{ product.price | money }}</span>
-          {% if product.compare_at_price > product.price %}
-            <span class="old-price">{{ product.compare_at_price | money }}</span>
-            <span class="discount-badge">
-              {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% OFF
-            </span>
-          {% endif %}
-        </div>
+        <p class="product__price">${{ product.price | money }}</p>
 
         {% if product.variants.size > 1 %}
           <div class="product__variants">
-            <label for="product-variant">Select option:</label>
+            <label for="product-variant">Choose Size:</label>
             <select id="product-variant" name="id">
               {% for variant in product.variants %}
                 <option
