@@ -211,9 +211,9 @@
           <div class="product__share">
             <p>Share:</p>
             <div class="share-buttons">
-              {% if settings.facebook %}
+              {% if settings.social_facebook_link != blank %}
                 <a
-                  href="{{ settings.facebook }}"
+                  href="{{ settings.social_facebook_link }}"
                   target="_blank"
                   rel="noopener">
                   <svg
@@ -226,9 +226,9 @@
                   </svg>
                 </a>
               {% endif %}
-              {% if settings.twitter %}
+              {% if settings.social_twitter_link != blank %}
                 <a
-                  href="{{ settings.twitter }}"
+                  href="{{ settings.social_twitter_link }}"
                   target="_blank"
                   rel="noopener">
                   <svg
@@ -241,9 +241,9 @@
                   </svg>
                 </a>
               {% endif %}
-              {% if settings.pinterest %}
+              {% if settings.social_pinterest_link != blank %}
                 <a
-                  href="{{ settings.pinterest }}"
+                  href="{{ settings.social_pinterest_link }}"
                   target="_blank"
                   rel="noopener">
                   <svg
