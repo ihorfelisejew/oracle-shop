@@ -87,7 +87,7 @@
           <p class="out-of-stock">Not In Stock</p>
         {% endif %}
 
-        <p class="product__price">${{ product.price | money }}</p>
+        <p class="product__price">{{ product.price | money }}</p>
 
         <div class="product__options">
           {% if product.variants.size > 1 %}
