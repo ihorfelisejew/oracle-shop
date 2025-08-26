@@ -263,21 +263,30 @@
     </section>
     {% if section.settings.show_related_products %}
       <section class="related-products">
-        <h2>You may also like</h2>
-        <div class="related-products__grid">
+        <h2 class="related-products__title title">You may also like</h2>
+        <div class="related-products__list">
           {% for related_product in collections.all.products limit: 4 %}
             {% if related_product.handle != product.handle %}
               <div class="related-product__item">
-                <a href="{{ related_product.url }}">
+                <a href="{{ related_product.url }}" class="image__block">
+                  {%- if related_product.tags contains 'New' -%}
+                    <span class="product__label">New</span>
+                  {%- endif -%}
                   <img
                     src="{{ related_product.featured_image | img_url: '300x' }}"
                     alt="{{ related_product.title | escape }}"
                     loading="lazy"
                     width="300"
                     height="{{ 300 | divided_by: related_product.featured_image.aspect_ratio | round }}">
-                  <h4>{{ related_product.title }}</h4>
-                  <p>{{ related_product.price | money }}</p>
+                  <span class="view-more">View More</span>
                 </a>
+                <a href="{{ related_product.url }}" class="product__name">{{ related_product.title }}</a>
+                <p class="product__price">
+                  {{ related_product.price | money }}
+                  {%- if related_product.compare_at_price > related_product.price -%}
+                    <span class="old-price">{{ related_product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </p>
               </div>
             {% endif %}
           {% endfor %}
