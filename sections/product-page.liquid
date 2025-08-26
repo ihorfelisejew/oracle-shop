@@ -155,29 +155,41 @@
           </button>
         </div>
 
-        <div class="product__description">
-          <h3>Description</h3>
-          <div class="description-content">
-            {{ product.description }}
-          </div>
-        </div>
-
-        {% if product.metafields.custom.additional_info %}
-          <div class="product__additional-info">
-            <h3>Additional Information</h3>
-            <div class="additional-info-content">
-              {{ product.metafields.custom.additional_info | metafield_tag }}
+        <div class="general-info__block">
+          <ul class="general-info__menu">
+            <li class="menu__item active" data-item="description">
+              Description
+            </li>
+            <li class="menu__item" data-item="shipping">
+              Shipping and returns
+            </li>
+            <li class="menu__item" data-item="packaging">
+              Packaging
+            </li>
+          </ul>
+          <div class="general-info__list">
+            <div class="list__item description active">
+              <p class="list-item__text">{{ product.description }}</p>
+            </div>
+            <div class="list__item shipping">
+              <p class="list-item__text">
+                Delivery according to Nova Post rates
+              </p>
+            </div>
+            <div class="list__item packaging">
+              <p class="list-item__text">
+                You can order personal packaging of parcels from us. Parcels are also actually packed at Nova Post branches.
+              </p>
             </div>
           </div>
-        {% endif %}
-
+        </div>
         {% if section.settings.show_share_buttons %}
           <div class="product__share">
             <h3>Share this product</h3>
             <div class="share-buttons">
-              <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: product.url | url_encode }}" target="_blank">Facebook</a>
-              <a href="https://twitter.com/intent/tweet?text=Check out {{ product.title | url_encode }}&url={{ shop.url | append: product.url | url_encode }}" target="_blank">Twitter</a>
-              <a href="https://pinterest.com/pin/create/button/?url={{ shop.url | append: product.url | url_encode }}&media={{ product.featured_image | img_url: '800x' | url_encode }}&description={{ product.title | url_encode }}" target="_blank">Pinterest</a>
+              <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+              <a href="https://twitter.com/" target="_blank">Twitter</a>
+              <a href="https://pinterest.com/" target="_blank">Pinterest</a>
             </div>
           </div>
         {% endif %}
