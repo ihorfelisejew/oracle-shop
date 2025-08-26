@@ -74,32 +74,33 @@
 			Filter
 		</button>
 	</aside>
-	<div class="products-list">
-		{% paginate collection.products by 8 %}
-		{% for product_item in collection.products %}
-			<div class="product-list__item">
-			<a href="{{ product_item.url }}" class="image__block">
-				{%- if product_item.tags contains 'New' -%}
-				<span class="product__label">New</span>
-				{%- endif -%}
-				<img
-				src="{{ product_item.featured_image | img_url: '300x' }}"
-				alt="{{ product_item.title | escape }}"
-				loading="lazy"
-				width="300"
-				height="{{ 300 | divided_by: product_item.featured_image.aspect_ratio | round }}">
-				<span class="view-more">View More</span>
-			</a>
-			<a href="{{ product_item.url }}" class="product__name">{{ product_item.title }}</a>
-			<p class="product__price">
-				{{ product_item.price | money }}
-				{%- if product_item.compare_at_price > product_item.price -%}
-				<span class="old-price">{{ product_item.compare_at_price | money }}</span>
-				{%- endif -%}
-			</p>
-			</div>
-		{% endfor %}
-
+	<section class="products__block">
+		<div class="products-list">
+			{% paginate collection.products by 8 %}
+			{% for product_item in collection.products %}
+				<div class="product-list__item">
+				<a href="{{ product_item.url }}" class="image__block">
+					{%- if product_item.tags contains 'New' -%}
+					<span class="product__label">New</span>
+					{%- endif -%}
+					<img
+					src="{{ product_item.featured_image | img_url: '300x' }}"
+					alt="{{ product_item.title | escape }}"
+					loading="lazy"
+					width="300"
+					height="{{ 300 | divided_by: product_item.featured_image.aspect_ratio | round }}">
+					<span class="view-more">View More</span>
+				</a>
+				<a href="{{ product_item.url }}" class="product__name">{{ product_item.title }}</a>
+				<p class="product__price">
+					{{ product_item.price | money }}
+					{%- if product_item.compare_at_price > product_item.price -%}
+					<span class="old-price">{{ product_item.compare_at_price | money }}</span>
+					{%- endif -%}
+				</p>
+				</div>
+			{% endfor %}
+		</div>
 		{% if paginate.pages > 1 %}
 			<div class="pagination">
 			{% if paginate.previous %}
@@ -121,7 +122,68 @@
 		{% endif %}
 
 		{% endpaginate %}
+	</section>
+  </div>
+  <div class="catalog-page__bottom">
+	<h2 class="bottom__title">
+		Choosing jewelry for a graceful woman's hand, you can easily get confused, because rings impress with a variety of shapes.
+	</h2>
+	<div class="newsletter__block">
+		<img src="{{ section.settings.newsletter_image | img_url: '600x' }}" alt="Newsletter">
+		<div class="newsletter__info">
+			<h3 class="newsletter__title title">
+			{{ section.settings.newsletter_title }}
+			</h3>
+			<p class="newsletter__desc">
+			{{ section.settings.newsletter_desc }}
+			</p>
+			<form class="newsletter__form">
+			<input
+				type="email"
+				name="email"
+				id="email"
+				placeholder="Your Email">
+			<button type="submit" class="newsletter__submit btn">{{ section.settings.newsletter_button_text }}</button>
+			</form>
+		</div>
 	</div>
   </div>
-  
 </div>
+
+{% schema %}
+  {
+    "name": "Collection Block",
+    "settings": [
+       {
+        "type": "header",
+        "content": "Newsletter Block"
+      }, {
+        "type": "image_picker",
+        "id": "newsletter_image",
+        "label": "Image"
+      }, {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Newsletter Title",
+        "default": "Newsletter"
+      }, {
+        "type": "textarea",
+        "id": "newsletter_desc",
+        "label": "Newsletter Description",
+        "default": "Sign up for exclusive deals and early access to new products."
+      }, {
+        "type": "text",
+        "id": "newsletter_button_text",
+        "label": "Button Text",
+        "default": "Subscribe"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection Block",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}
+
