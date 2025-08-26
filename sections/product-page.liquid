@@ -169,7 +169,7 @@
           </ul>
           <div class="general-info__list">
             <div class="list__item description active">
-              <p class="list-item__text">{{ product.description }}</p>
+              <p class="list-item__text">{{ product.description | strip_html }}</p>
             </div>
             <div class="list__item shipping">
               <p class="list-item__text">
