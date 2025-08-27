@@ -133,7 +133,7 @@
               Min Price:
               <input
                 type="number"
-                name="filter[price][min]"
+                name="price_min"
                 value="{{ filter.active_min | default: filter.min_value }}"
                 placeholder="{{ filter.min_value }}">
             </label>
@@ -141,7 +141,7 @@
               Max Price:
               <input
                 type="number"
-                name="filter[price][max]"
+                name="price_max"
                 value="{{ filter.active_max | default: filter.max_value }}"
                 placeholder="{{ filter.max_value }}">
             </label>
