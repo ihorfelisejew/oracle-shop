@@ -153,18 +153,19 @@
                   name="{{ filter.param_name }}"
                   value="{{ value.value }}"
                   {% if value.active %}
-                  checked{% endif %}
-                  onchange="this.form.submit()">
+                  checked{% endif %}>
                 {{ value.label }}
               </label>
             {% endfor %}
           {% endif %}
 
         {% endfor %}
+
+        <!-- Кнопка сабміту форми -->
+        <button type="submit" class="submit-filters btn">
+          Filter
+        </button>
       </form>
-      <button class="submit-filters btn">
-        Filter
-      </button>
     </aside>
     <section class="products__block">
       {% paginate collection.products by 8 %}
