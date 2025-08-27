@@ -130,10 +130,8 @@
         class="filters__list">
         {% for filter in collection.filters %}
           <div class="filter__item">
+            <h3 class="filter__title">{{ filter.label }}</h3>
             {% if filter.label == 'Price' %}
-              <h3 class="filter__title">
-                Price
-              </h3>
               <div class="price-range">
                 <input
                   type="number"
@@ -168,9 +166,6 @@
               </div>
             {% endif %}
           </div>
-          <h4>{{ filter.label }}</h4>
-
-
         {% endfor %}
 
         <button type="submit" class="submit-filters btn">Filter</button>
