@@ -124,43 +124,52 @@
   </div>
   <div class="catalog-page__content">
     <aside class="filters-block">
-      <form method="get" id="filters-form">
+      <form
+        method="get"
+        id="filters-form"
+        class="filters__list">
         {% for filter in collection.filters %}
+          <div class="filter__item">
+            {% if filter.label == 'Price' %}
+              <h3 class="filter__title">
+                Price
+              </h3>
+              <div class="price-range">
+                <input
+                  type="number"
+                  name="price_min"
+                  value="{{ request.params.price_min }}"
+                  placeholder="{{ filter.min_value }}">
+                <span class="separator">
+                  -
+                </span>
+                <input
+                  type="number"
+                  name="price_max"
+                  value="{{ request.params.price_max }}"
+                  placeholder="{{ filter.max_value }}">
+              </div>
+            {% else %}
+              <div class="filter__values">
+                {% for value in filter.values %}
+                  {% assign checked = '' %}
+                  {% if request.params[value.param_name] contains value.value %}
+                    {% assign checked = 'checked' %}
+                  {% endif %}
+                  <input
+                    type="checkbox"
+                    name="{{ value.param_name }}"
+                    value="{{ value.value }}"
+                    {{ checked }}>
+                  <label>
+                    {{ value.label }}
+                  </label>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
           <h4>{{ filter.label }}</h4>
 
-          {% if filter.label == 'Price' %}
-            <label>
-              Min Price:
-              <input
-                type="number"
-                name="price_min"
-                value="{{ request.params.price_min }}"
-                placeholder="{{ filter.min_value }}">
-            </label>
-            <label>
-              Max Price:
-              <input
-                type="number"
-                name="price_max"
-                value="{{ request.params.price_max }}"
-                placeholder="{{ filter.max_value }}">
-            </label>
-          {% else %}
-            {% for value in filter.values %}
-              {% assign checked = '' %}
-              {% if request.params[value.param_name] contains value.value %}
-                {% assign checked = 'checked' %}
-              {% endif %}
-              <label>
-                <input
-                  type="checkbox"
-                  name="{{ value.param_name }}"
-                  value="{{ value.value }}"
-                  {{ checked }}>
-                {{ value.label }}
-              </label>
-            {% endfor %}
-          {% endif %}
 
         {% endfor %}
 
