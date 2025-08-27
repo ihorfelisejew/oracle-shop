@@ -126,21 +126,47 @@
     <aside class="filters-block">
       <form method="get" id="filters-form">
         {% for filter in collection.filters %}
-          <h4>{{ filter.label }}</h4>
-          {% for value in filter.values %}
-            <label>
+          {% if filter.label == 'Price' %}
+            <h4>{{ filter.label }}</h4>
+            <div class="price-range">
               <input
-                type="checkbox"
-                name="{{ filter.param_name }}"
-                value="{{ value.value }}"
-                {% if value.active %}
-                checked{% endif %}
-                onchange="this.form.submit()">
-              {{ value.label }}
-            </label>
-          {% endfor %}
+                type="range"
+                name="{{ filter.param_name }}_min"
+                min="{{ filter.min_value }}"
+                max="{{ filter.max_value }}"
+                value="{{ filter.active_min | default: filter.min_value }}"
+                id="price-min">
+              <span id="price-min-value">{{ filter.active_min | default: filter.min_value }}</span>
+
+              <input
+                type="range"
+                name="{{ filter.param_name }}_max"
+                min="{{ filter.min_value }}"
+                max="{{ filter.max_value }}"
+                value="{{ filter.active_max | default: filter.max_value }}"
+                id="price-max">
+              <span id="price-max-value">{{ filter.active_max | default: filter.max_value }}</span>
+            </div>
+          {% else %}
+            <h4>{{ filter.label }}</h4>
+            {% for value in filter.values %}
+              <label>
+                <input
+                  type="checkbox"
+                  name="{{ filter.param_name }}[]"
+                  value="{{ value.value }}"
+                  {% if value.active %}
+                  checked{% endif %}
+                  onchange="this.form.submit()">
+                {{ value.label }}
+              </label>
+            {% endfor %}
+          {% endif %}
         {% endfor %}
+
+        <button type="submit" class="submit-filters btn">Filter</button>
       </form>
+
 
       <button class="submit-filters btn">
         Filter
