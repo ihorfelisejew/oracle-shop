@@ -124,29 +124,44 @@
   </div>
   <div class="catalog-page__content">
     <aside class="filters-block">
-      {% assign price_filter = collection.filters | where: "label", "Price" | first %}
-      {% if price_filter %}
-        <h4>Price</h4>
-        <div class="price-range">
-          <input
-            type="range"
-            name="filter[price][min]"
-            min="{{ price_filter.min_value }}"
-            max="{{ price_filter.max_value }}"
-            value="{{ price_filter.active_min | default: price_filter.min_value }}"
-            id="price-min">
-          <span id="price-min-value">{{ price_filter.active_min | default: price_filter.min_value }}</span>
+      <form method="get" id="filters-form">
+        {% for filter in collection.filters %}
+          <h4>{{ filter.label }}</h4>
 
-          <input
-            type="range"
-            name="filter[price][max]"
-            min="{{ price_filter.min_value }}"
-            max="{{ price_filter.max_value }}"
-            value="{{ price_filter.active_max | default: price_filter.max_value }}"
-            id="price-max">
-          <span id="price-max-value">{{ price_filter.active_max | default: price_filter.max_value }}</span>
-        </div>
-      {% endif %}
+          {% if filter.label == 'Price' %}
+            <label>
+              Min Price:
+              <input
+                type="number"
+                name="filter[price][min]"
+                value="{{ filter.active_min | default: filter.min_value }}"
+                placeholder="{{ filter.min_value }}">
+            </label>
+            <label>
+              Max Price:
+              <input
+                type="number"
+                name="filter[price][max]"
+                value="{{ filter.active_max | default: filter.max_value }}"
+                placeholder="{{ filter.max_value }}">
+            </label>
+          {% else %}
+            {% for value in filter.values %}
+              <label>
+                <input
+                  type="checkbox"
+                  name="{{ filter.param_name }}"
+                  value="{{ value.value }}"
+                  {% if value.active %}
+                  checked{% endif %}
+                  onchange="this.form.submit()">
+                {{ value.label }}
+              </label>
+            {% endfor %}
+          {% endif %}
+
+        {% endfor %}
+      </form>
       <button class="submit-filters btn">
         Filter
       </button>
@@ -225,20 +240,6 @@
     </div>
   </div>
 </div>
-<script>
-  	const priceMin = document.getElementById('price-min');
-  const priceMax = document.getElementById('price-max');
-  const priceMinValue = document.getElementById('price-min-value');
-  const priceMaxValue = document.getElementById('price-max-value');
-
-  priceMin.addEventListener('input', () => {
-  priceMinValue.textContent = priceMin.value;
-  });
-
-  priceMax.addEventListener('input', () => {
-  priceMaxValue.textContent = priceMax.value;
-  });
-</script>
 
 {% schema %}
   {
