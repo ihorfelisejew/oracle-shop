@@ -95,7 +95,6 @@
       </button>
     </form>
     <form method="get" action="">
-      <label for="sort_by">Сортувати:</label>
       <select
         name="sort_by"
         id="sort_by"
@@ -159,7 +158,9 @@
                       type="checkbox"
                       name="{{ value.param_name }}"
                       value="{{ value.value }}"
-                      {{ checked }}>
+                      {% if request.params[value.param_name] and request.params[value.param_name] contains value.value %}
+                      checked{% endif %}>
+                    <label>{{ value.label }}</label>
                     <label>
                       {{ value.label }}
                     </label>
