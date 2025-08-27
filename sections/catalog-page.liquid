@@ -246,6 +246,20 @@
     </div>
   </div>
 </div>
+<script>
+  	const priceMin = document.getElementById('price-min');
+  const priceMax = document.getElementById('price-max');
+  const priceMinValue = document.getElementById('price-min-value');
+  const priceMaxValue = document.getElementById('price-max-value');
+
+  priceMin.addEventListener('input', () => {
+  priceMinValue.textContent = priceMin.value;
+  });
+
+  priceMax.addEventListener('input', () => {
+  priceMaxValue.textContent = priceMax.value;
+  });
+</script>
 
 {% schema %}
   {
