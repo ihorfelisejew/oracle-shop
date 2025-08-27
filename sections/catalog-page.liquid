@@ -92,20 +92,19 @@
     <aside class="filters-block">
       <form method="get" id="filters-form">
         {% for filter in collection.filters %}
-          {% if filter.label == 'Size' %}
-            {% for value in filter.values %}
-              <label>
-                <input
-                  type="checkbox"
-                  name="{{ filter.param_name }}[]"
-                  value="{{ value.value }}"
-                  {% if value.active %}
-                  checked{% endif %}
-                  onchange="this.form.submit()">
-                {{ value.label }}
-              </label>
-            {% endfor %}
-          {% endif %}
+          <h4>{{ filter.label }}</h4>
+          {% for value in filter.values %}
+            <label>
+              <input
+                type="checkbox"
+                name="{{ filter.param_name }}[]"
+                value="{{ value.value }}"
+                {% if value.active %}
+                checked{% endif %}
+                onchange="this.form.submit()">
+              {{ value.label }}
+            </label>
+          {% endfor %}
         {% endfor %}
       </form>
 
