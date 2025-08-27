@@ -150,17 +150,11 @@
               <div class="filter__values">
                 {% for value in filter.values %}
                   <div class="filter__value">
-                    {% assign checked = '' %}
-                    {% if request.params[value.param_name] contains value.value %}
-                      {% assign checked = 'checked' %}
-                    {% endif %}
                     <input
                       type="checkbox"
                       name="{{ value.param_name }}"
                       value="{{ value.value }}"
-                      {% if request.params[value.param_name] and request.params[value.param_name] contains value.value %}
-                      checked{% endif %}>
-                    <label>{{ value.label }}</label>
+                      {% if value.active %} checked{% endif %}>
                     <label>
                       {{ value.label }}
                     </label>
