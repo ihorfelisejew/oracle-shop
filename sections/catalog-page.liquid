@@ -58,11 +58,19 @@
     <p class="collection-description">{{ collection.description }}</p>
   {% endif %}
   <div class="catalog-page__header">
-    <form class="search-form">
+    <form
+      action="{{ routes.search_url }}"
+      method="get"
+      class="search-form">
       <input
         type="text"
-        name="search_value"
-        placeholder="Search">
+        name="q"
+        placeholder="Search"
+        value="{{ search.terms | escape }}">
+      <input
+        type="hidden"
+        name="type"
+        value="product">
       <button type="submit">
         <svg
           width="20"
