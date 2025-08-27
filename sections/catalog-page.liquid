@@ -58,95 +58,133 @@
     <p class="collection-description">{{ collection.description }}</p>
   {% endif %}
   <div class="catalog-page__header">
-  	<form class="search-form">
-		<input type="text" name="search_value" placeholder="Search">
-		<button type="submit">
-			<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<circle cx="9" cy="9" r="8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-				<path d="M15.0183 15.4851L18.5423 19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
-		</button>
-	</form>
+    <form class="search-form">
+      <input
+        type="text"
+        name="search_value"
+        placeholder="Search">
+      <button type="submit">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <circle
+            cx="9"
+            cy="9"
+            r="8"
+            stroke="black"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path
+            d="M15.0183 15.4851L18.5423 19"
+            stroke="black"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </form>
   </div>
   <div class="catalog-page__content">
-	<aside class="filters-block">
-		<button class="submit-filters btn">
-			Filter
-		</button>
-	</aside>
-	<section class="products__block">
-		<div class="products-list">
-			{% paginate collection.products by 8 %}
-			{% for product_item in collection.products %}
-				<div class="product-list__item">
-				<a href="{{ product_item.url }}" class="image__block">
-					{%- if product_item.tags contains 'New' -%}
-					<span class="product__label">New</span>
-					{%- endif -%}
-					<img
-					src="{{ product_item.featured_image | img_url: '300x' }}"
-					alt="{{ product_item.title | escape }}"
-					loading="lazy"
-					width="300"
-					height="{{ 300 | divided_by: product_item.featured_image.aspect_ratio | round }}">
-					<span class="view-more">View More</span>
-				</a>
-				<a href="{{ product_item.url }}" class="product__name">{{ product_item.title }}</a>
-				<p class="product__price">
-					{{ product_item.price | money }}
-					{%- if product_item.compare_at_price > product_item.price -%}
-					<span class="old-price">{{ product_item.compare_at_price | money }}</span>
-					{%- endif -%}
-				</p>
-				</div>
-			{% endfor %}
-		</div>
-		{% if paginate.pages > 1 %}
-			<div class="pagination">
-			{% if paginate.previous %}
-				<a href="{{ paginate.previous.url }}">Previous</a>
-			{% endif %}
+    <aside class="filters-block">
+      <form method="get" id="filters-form">
+        {% for filter in collection.filters %}
+          {% if filter.label == 'Size' %}
+            {% for value in filter.values %}
+              <label>
+                <input
+                  type="checkbox"
+                  name="{{ filter.param_name }}[]"
+                  value="{{ value.value }}"
+                  {% if value.active %}
+                  checked{% endif %}
+                  onchange="this.form.submit()">
+                {{ value.label }}
+              </label>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </form>
 
-			{% for part in paginate.parts %}
-				{% if part.is_link %}
-				<a href="{{ part.url }}">{{ part.title }}</a>
-				{% else %}
-				<span>{{ part.title }}</span>
-				{% endif %}
-			{% endfor %}
+      <button class="submit-filters btn">
+        Filter
+      </button>
+    </aside>
+    <section class="products__block">
+      {% paginate collection.products by 8 %}
+        <div class="products-list">
+          {% for product_item in collection.products %}
+            <div class="product-list__item">
+              <a href="{{ product_item.url }}" class="image__block">
+                {%- if product_item.tags contains 'New' -%}
+                  <span class="product__label">New</span>
+                {%- endif -%}
+                <img
+                  src="{{ product_item.featured_image | img_url: '300x' }}"
+                  alt="{{ product_item.title | escape }}"
+                  loading="lazy"
+                  width="300"
+                  height="{{ 300 | divided_by: product_item.featured_image.aspect_ratio | round }}">
+                <span class="view-more">View More</span>
+              </a>
+              <a href="{{ product_item.url }}" class="product__name">{{ product_item.title }}</a>
+              <p class="product__price">
+                {{ product_item.price | money }}
+                {%- if product_item.compare_at_price > product_item.price -%}
+                  <span class="old-price">{{ product_item.compare_at_price | money }}</span>
+                {%- endif -%}
+              </p>
+            </div>
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}
+          <div class="pagination">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}">Previous</a>
+            {% endif %}
 
-			{% if paginate.next %}
-				<a href="{{ paginate.next.url }}">Next</a>
-			{% endif %}
-			</div>
-		{% endif %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <a href="{{ part.url }}">{{ part.title }}</a>
+              {% else %}
+                <span>{{ part.title }}</span>
+              {% endif %}
+            {% endfor %}
 
-		{% endpaginate %}
-	</section>
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}">Next</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    </section>
   </div>
   <div class="catalog-page__bottom">
-	<h2 class="bottom__title">
-		Choosing jewelry for a graceful woman's hand, you can easily get confused, because rings impress with a variety of shapes.
-	</h2>
-	<div class="newsletter__block">
-		<img src="{{ section.settings.newsletter_image | img_url: '600x' }}" alt="Newsletter">
-		<div class="newsletter__info">
-			<h3 class="newsletter__title title">
-			{{ section.settings.newsletter_title }}
-			</h3>
-			<p class="newsletter__desc">
-			{{ section.settings.newsletter_desc }}
-			</p>
-			<form class="newsletter__form">
-			<input
-				type="email"
-				name="email"
-				id="email"
-				placeholder="Your Email">
-			<button type="submit" class="newsletter__submit btn">{{ section.settings.newsletter_button_text }}</button>
-			</form>
-		</div>
-	</div>
+    <h2 class="bottom__title">
+      Choosing jewelry for a graceful woman's hand, you can easily get confused, because rings impress with a variety of shapes.
+    </h2>
+    <div class="newsletter__block">
+      <img src="{{ section.settings.newsletter_image | img_url: '600x' }}" alt="Newsletter">
+      <div class="newsletter__info">
+        <h3 class="newsletter__title title">
+          {{ section.settings.newsletter_title }}
+        </h3>
+        <p class="newsletter__desc">
+          {{ section.settings.newsletter_desc }}
+        </p>
+        <form class="newsletter__form">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Your Email">
+          <button type="submit" class="newsletter__submit btn">{{ section.settings.newsletter_button_text }}</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -154,19 +192,22 @@
   {
     "name": "Collection Block",
     "settings": [
-       {
+      {
         "type": "header",
         "content": "Newsletter Block"
-      }, {
+      },
+      {
         "type": "image_picker",
         "id": "newsletter_image",
         "label": "Image"
-      }, {
+      },
+      {
         "type": "text",
         "id": "newsletter_title",
         "label": "Newsletter Title",
         "default": "Newsletter"
-      }, {
+      },
+      {
         "type": "textarea",
         "id": "newsletter_desc",
         "label": "Newsletter Description",
@@ -186,4 +227,3 @@
     ]
   }
 {% endschema %}
-
