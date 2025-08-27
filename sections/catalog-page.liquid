@@ -59,14 +59,13 @@
   {% endif %}
   <div class="catalog-page__header">
     <form
-      action="{{ routes.search_url }}"
-      method="get"
-      class="search-form">
+      class="search-form"
+      action="{{ collection.url }}"
+      method="get">
       <input
         type="text"
         name="q"
-        placeholder="Search"
-        value="{{ search.terms | escape }}">
+        placeholder="Search in {{ collection.title }}">
       <input
         type="hidden"
         name="type"
