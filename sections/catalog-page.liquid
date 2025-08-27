@@ -134,7 +134,7 @@
               <input
                 type="number"
                 name="price_min"
-                value="{{ filter.active_min | default: filter.min_value }}"
+                value="{{ request.params.price_min }}"
                 placeholder="{{ filter.min_value }}">
             </label>
             <label>
@@ -142,18 +142,21 @@
               <input
                 type="number"
                 name="price_max"
-                value="{{ filter.active_max | default: filter.max_value }}"
+                value="{{ request.params.price_max }}"
                 placeholder="{{ filter.max_value }}">
             </label>
           {% else %}
             {% for value in filter.values %}
+              {% assign checked = '' %}
+              {% if request.params[value.param_name] contains value.value %}
+                {% assign checked = 'checked' %}
+              {% endif %}
               <label>
                 <input
                   type="checkbox"
-                  name="{{ filter.param_name }}"
+                  name="{{ value.param_name }}"
                   value="{{ value.value }}"
-                  {% if value.active %}
-                  checked{% endif %}>
+                  {{ checked }}>
                 {{ value.label }}
               </label>
             {% endfor %}
@@ -161,12 +164,10 @@
 
         {% endfor %}
 
-        <!-- Кнопка сабміту форми -->
-        <button type="submit" class="submit-filters btn">
-          Filter
-        </button>
+        <button type="submit" class="submit-filters btn">Filter</button>
       </form>
     </aside>
+
     <section class="products__block">
       {% paginate collection.products by 8 %}
         <div class="products-list">
