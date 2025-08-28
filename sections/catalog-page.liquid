@@ -134,16 +134,14 @@
               <div class="price-range">
                 <input
                   type="number"
-                  name="price_min"
-                  value="{{ request.params.price_min }}"
+                  name="filter.v.price.gte"
+                  value="{{ request.params['filter.v.price.gte'] }}"
                   placeholder="{{ filter.min_value }}">
-                <span class="separator">
-                  -
-                </span>
+                <span class="separator">-</span>
                 <input
                   type="number"
-                  name="price_max"
-                  value="{{ request.params.price_max }}"
+                  name="filter.v.price.lte"
+                  value="{{ request.params['filter.v.price.lte'] }}"
                   placeholder="{{ filter.max_value }}">
               </div>
             {% else %}
@@ -154,7 +152,8 @@
                       type="checkbox"
                       name="{{ value.param_name }}"
                       value="{{ value.value }}"
-                      {% if value.active %} checked{% endif %}>
+                      {% if value.active %}
+                      checked{% endif %}>
                     <label>
                       {{ value.label }}
                     </label>
