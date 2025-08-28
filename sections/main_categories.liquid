@@ -8,35 +8,35 @@
         {% if section.settings.image_earrings %}
           <img src="{{ section.settings.image_earrings | img_url: '300x' }}" alt="{{ section.settings.collection_earrings.title }}">
         {% endif %}
-        <span>{{ section.settings.collection_earrings.title }}</span>
+        <span>{{ section.settings.title_earrings }}</span>
       </a>
 
       <a href="{{ section.settings.collection_bracelets.url }}" class="category__item bracelets">
         {% if section.settings.image_bracelets %}
           <img src="{{ section.settings.image_bracelets | img_url: '300x' }}" alt="{{ section.settings.collection_bracelets.title }}">
         {% endif %}
-        <span>{{ section.settings.collection_bracelets.title }}</span>
+        <span>{{ section.settings.title_bracelets }}</span>
       </a>
 
       <a href="{{ section.settings.collection_rings.url }}" class="category__item rings">
         {% if section.settings.image_rings %}
           <img src="{{ section.settings.image_rings | img_url: '300x' }}" alt="{{ section.settings.collection_rings.title }}">
         {% endif %}
-        <span>{{ section.settings.collection_rings.title }}</span>
+        <span>{{ section.settings.title_rings }}</span>
       </a>
 
       <a href="{{ section.settings.collection_unusual.url }}" class="category__item unusual">
         {% if section.settings.image_unusual %}
           <img src="{{ section.settings.image_unusual | img_url: '300x' }}" alt="{{ section.settings.collection_unusual.title }}">
         {% endif %}
-        <span>{{ section.settings.collection_unusual.title }}</span>
+        <span>{{ section.settings.title_unusual }}</span>
       </a>
 
       <a href="{{ section.settings.collection_necklaces.url }}" class="category__item necklaces">
         {% if section.settings.image_necklaces %}
           <img src="{{ section.settings.image_necklaces | img_url: '300x' }}" alt="{{ section.settings.collection_necklaces.title }}">
         {% endif %}
-        <span>{{ section.settings.collection_necklaces.title }}</span>
+        <span>{{ section.settings.title_necklaces }}</span>
       </a>
     </div>
   </div>
@@ -62,6 +62,11 @@
         "label": "Image"
       },
       {
+        "type": "text",
+        "id": "title_earrings",
+        "label": "Title",
+        "default": "Earrings"
+      }, {
         "type": "collection",
         "id": "collection_earrings",
         "label": "Collection Url"
@@ -72,6 +77,11 @@
         "type": "image_picker",
         "id": "image_bracelets",
         "label": "Image"
+      }, {
+        "type": "text",
+        "id": "title_bracelets",
+        "label": "Title",
+        "default": "Bracelets"
       }, {
         "type": "collection",
         "id": "collection_bracelets",
@@ -84,6 +94,11 @@
         "id": "image_rings",
         "label": "Image"
       }, {
+        "type": "text",
+        "id": "title_rings",
+        "label": "Title",
+        "default": "Rings"
+      }, {
         "type": "collection",
         "id": "collection_rings",
         "label": "Collection Url"
@@ -95,6 +110,11 @@
         "id": "image_unusual",
         "label": "Image"
       }, {
+        "type": "text",
+        "id": "title_unusual",
+        "label": "Title",
+        "default": "Unusual"
+      }, {
         "type": "collection",
         "id": "collection_unusual",
         "label": "Collection Url"
@@ -105,6 +125,11 @@
         "type": "image_picker",
         "id": "image_necklaces",
         "label": "Image"
+      }, {
+        "type": "text",
+        "id": "title_necklaces",
+        "label": "Title",
+        "default": "Necklaces"
       }, {
         "type": "collection",
         "id": "collection_necklaces",
