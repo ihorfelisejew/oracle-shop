@@ -53,10 +53,20 @@
       "settings": {
         "title": "Minimalism and simplicity combined with interesting shapes. Choose a piece of jewelry that you like.",
         "image_earrings": "shopify://shop_images/main_category_1.png",
+        "title_earrings": "Earrings",
+        "collection_earrings": "earrings",
         "image_bracelets": "shopify://shop_images/main_category_2.png",
+        "title_bracelets": "Bracelets",
+        "collection_bracelets": "bracelets",
         "image_rings": "shopify://shop_images/main_category_3.png",
+        "title_rings": "Rings",
+        "collection_rings": "rings",
         "image_unusual": "shopify://shop_images/main_category_4.png",
-        "image_necklaces": "shopify://shop_images/main_category_5.png"
+        "title_unusual": "Unusual",
+        "collection_unusual": "unusual-jewelry",
+        "image_necklaces": "shopify://shop_images/main_category_5.png",
+        "title_necklaces": "Necklaces",
+        "collection_necklaces": "necklaces-1"
       }
     },
     "main_blog_69wXyN": {
