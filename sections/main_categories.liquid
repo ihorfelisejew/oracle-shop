@@ -4,71 +4,118 @@
       {{ section.settings.title }}
     </h2>
     <div class="categories__list">
-      <a href="/collections/earrings" class="category__item earrings">
-        <img src="{{ section.settings.image_earrings | img_url: '300x' }}" alt="Earrings">
-        <span>Earrings</span>
+      <a href="{{ section.settings.collection_earrings.url }}" class="category__item earrings">
+        {% if section.settings.image_earrings %}
+          <img src="{{ section.settings.image_earrings | img_url: '300x' }}" alt="{{ section.settings.collection_earrings.title }}">
+        {% endif %}
+        <span>{{ section.settings.collection_earrings.title }}</span>
       </a>
-      <a href="/collections/bracelets" class="category__item bracelets">
-        <img src="{{ section.settings.image_bracelets | img_url: '300x' }}" alt="Bracelets">
-        <span>Bracelets</span>
+
+      <a href="{{ section.settings.collection_bracelets.url }}" class="category__item bracelets">
+        {% if section.settings.image_bracelets %}
+          <img src="{{ section.settings.image_bracelets | img_url: '300x' }}" alt="{{ section.settings.collection_bracelets.title }}">
+        {% endif %}
+        <span>{{ section.settings.collection_bracelets.title }}</span>
       </a>
-      <a href="/collections/rings" class="category__item rings">
-        <img src="{{ section.settings.image_rings | img_url: '300x' }}" alt="Rings">
-        <span>Rings</span>
+
+      <a href="{{ section.settings.collection_rings.url }}" class="category__item rings">
+        {% if section.settings.image_rings %}
+          <img src="{{ section.settings.image_rings | img_url: '300x' }}" alt="{{ section.settings.collection_rings.title }}">
+        {% endif %}
+        <span>{{ section.settings.collection_rings.title }}</span>
       </a>
-      <a href="/collections/unusual" class="category__item unusual">
-        <img src="{{ section.settings.image_unusual | img_url: '300x' }}" alt="Unusual">
-        <span>Unusual</span>
+
+      <a href="{{ section.settings.collection_unusual.url }}" class="category__item unusual">
+        {% if section.settings.image_unusual %}
+          <img src="{{ section.settings.image_unusual | img_url: '300x' }}" alt="{{ section.settings.collection_unusual.title }}">
+        {% endif %}
+        <span>{{ section.settings.collection_unusual.title }}</span>
       </a>
-      <a href="/collections/necklaces" class="category__item necklaces">
-        <img src="{{ section.settings.image_necklaces | img_url: '300x' }}" alt="Necklaces">
-        <span>Necklaces</span>
+
+      <a href="{{ section.settings.collection_necklaces.url }}" class="category__item necklaces">
+        {% if section.settings.image_necklaces %}
+          <img src="{{ section.settings.image_necklaces | img_url: '300x' }}" alt="{{ section.settings.collection_necklaces.title }}">
+        {% endif %}
+        <span>{{ section.settings.collection_necklaces.title }}</span>
       </a>
     </div>
   </div>
 </section>
 
 {% schema %}
-{
-  "name": "Categories Section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Section title",
-      "default": "Minimalism and simplicity combined with interesting shapes. Choose a piece of jewelry that you like."
-    },
-    {
-      "type": "image_picker",
-      "id": "image_earrings",
-      "label": "Earrings image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_bracelets",
-      "label": "Bracelets image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_rings",
-      "label": "Rings image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_unusual",
-      "label": "Unusual image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_necklaces",
-      "label": "Necklaces image"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Categories section",
-      "category": "Custom"
-    }
-  ]
-}
+  {
+    "name": "Categories Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section title",
+        "default": "Minimalism and simplicity combined with interesting shapes. Choose a piece of jewelry that you like."
+      },
+      {
+        "type": "header",
+        "content": "Category 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_earrings",
+        "label": "Image"
+      },
+      {
+        "type": "collection",
+        "id": "collection_earrings",
+        "label": "Collection Url"
+      }, {
+        "type": "header",
+        "content": "Category 2"
+      }, {
+        "type": "image_picker",
+        "id": "image_bracelets",
+        "label": "Image"
+      }, {
+        "type": "collection",
+        "id": "collection_bracelets",
+        "label": "Collection Url"
+      }, {
+        "type": "header",
+        "content": "Category 3"
+      }, {
+        "type": "image_picker",
+        "id": "image_rings",
+        "label": "Image"
+      }, {
+        "type": "collection",
+        "id": "collection_rings",
+        "label": "Collection Url"
+      }, {
+        "type": "header",
+        "content": "Category 4"
+      }, {
+        "type": "image_picker",
+        "id": "image_unusual",
+        "label": "Image"
+      }, {
+        "type": "collection",
+        "id": "collection_unusual",
+        "label": "Collection Url"
+      }, {
+        "type": "header",
+        "content": "Category 5"
+      }, {
+        "type": "image_picker",
+        "id": "image_necklaces",
+        "label": "Image"
+      }, {
+        "type": "collection",
+        "id": "collection_necklaces",
+        "label": "Collection Url"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Categories section",
+        "category": "Custom"
+      }
+    ]
+  }
 {% endschema %}

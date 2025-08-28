@@ -29,9 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           quantity: parseInt(quantity)
         })
       }).then(response => response.json()).then(data => {
-        // Оновлення кошика
         fetch("/cart.js").then(response => response.json()).then(cart => {
-          // Тут можна оновити віджет кошика
           alert("Product added to cart!");
         });
       }).catch(error => {
