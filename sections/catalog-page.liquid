@@ -217,30 +217,32 @@
       {% endpaginate %}
     </section>
   </div>
-  <div class="catalog-page__bottom">
-    <h2 class="bottom__title">
-      Choosing jewelry for a graceful woman's hand, you can easily get confused, because rings impress with a variety of shapes.
-    </h2>
-    <div class="newsletter__block">
-      <img src="{{ section.settings.newsletter_image | img_url: '600x' }}" alt="Newsletter">
-      <div class="newsletter__info">
-        <h3 class="newsletter__title title">
-          {{ section.settings.newsletter_title }}
-        </h3>
-        <p class="newsletter__desc">
-          {{ section.settings.newsletter_desc }}
-        </p>
-        <form class="newsletter__form">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Your Email">
-          <button type="submit" class="newsletter__submit btn">{{ section.settings.newsletter_button_text }}</button>
-        </form>
+  {% if section.settings.newsletter_show %}
+    <div class="catalog-page__bottom">
+      <h2 class="bottom__title">
+        Choosing jewelry for a graceful woman's hand, you can easily get confused, because rings impress with a variety of shapes.
+      </h2>
+      <div class="newsletter__block">
+        <img src="{{ section.settings.newsletter_image | img_url: '600x' }}" alt="Newsletter">
+        <div class="newsletter__info">
+          <h3 class="newsletter__title title">
+            {{ section.settings.newsletter_title }}
+          </h3>
+          <p class="newsletter__desc">
+            {{ section.settings.newsletter_desc }}
+          </p>
+          <form class="newsletter__form">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Your Email">
+            <button type="submit" class="newsletter__submit btn">{{ section.settings.newsletter_button_text }}</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 </div>
 
 {% schema %}
@@ -252,6 +254,11 @@
         "content": "Newsletter Block"
       },
       {
+        "type": "checkbox",
+        "id": "newsletter_show",
+        "label": "Show Block"
+      },
+      {
         "type": "image_picker",
         "id": "newsletter_image",
         "label": "Image"
@@ -261,8 +268,7 @@
         "id": "newsletter_title",
         "label": "Newsletter Title",
         "default": "Newsletter"
-      },
-      {
+      }, {
         "type": "textarea",
         "id": "newsletter_desc",
         "label": "Newsletter Description",
