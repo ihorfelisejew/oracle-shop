@@ -4,35 +4,35 @@
       {{ section.settings.title }}
     </h2>
     <div class="categories__list">
-      <a href="{{ section.settings.collection_earrings.url }}" class="category__item earrings">
+      <a href="{{ collections[section.settings.collection_earrings].url }}" class="category__item earrings">
         {% if section.settings.image_earrings %}
           <img src="{{ section.settings.image_earrings | img_url: '300x' }}" alt="{{ section.settings.collection_earrings.title }}">
         {% endif %}
         <span>{{ section.settings.title_earrings }}</span>
       </a>
 
-      <a href="{{ section.settings.collection_bracelets.url }}" class="category__item bracelets">
+      <a href="{{ collections[section.settings.collection_bracelets].url }}" class="category__item bracelets">
         {% if section.settings.image_bracelets %}
           <img src="{{ section.settings.image_bracelets | img_url: '300x' }}" alt="{{ section.settings.collection_bracelets.title }}">
         {% endif %}
         <span>{{ section.settings.title_bracelets }}</span>
       </a>
 
-      <a href="{{ section.settings.collection_rings.url }}" class="category__item rings">
+      <a href="{{ collections[section.settings.collection_rings].url }}" class="category__item rings">
         {% if section.settings.image_rings %}
           <img src="{{ section.settings.image_rings | img_url: '300x' }}" alt="{{ section.settings.collection_rings.title }}">
         {% endif %}
         <span>{{ section.settings.title_rings }}</span>
       </a>
 
-      <a href="{{ section.settings.collection_unusual.url }}" class="category__item unusual">
+      <a href="{{ collections[section.settings.collection_unusual].url }}" class="category__item unusual">
         {% if section.settings.image_unusual %}
           <img src="{{ section.settings.image_unusual | img_url: '300x' }}" alt="{{ section.settings.collection_unusual.title }}">
         {% endif %}
         <span>{{ section.settings.title_unusual }}</span>
       </a>
 
-      <a href="{{ section.settings.collection_necklaces.url }}" class="category__item necklaces">
+      <a href="{{ collections[section.settings.collection_necklaces].url }}" class="category__item necklaces">
         {% if section.settings.image_necklaces %}
           <img src="{{ section.settings.image_necklaces | img_url: '300x' }}" alt="{{ section.settings.collection_necklaces.title }}">
         {% endif %}
