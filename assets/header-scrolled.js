@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   const cartButton = header.querySelector(".cart__button");
-  const cartWrapper = document.querySelector(".cart-wrapper");
+  const cartWrapper = document.getElementById("cart-wrapper");
   if (cartButton && cartWrapper) {
     cartButton.addEventListener("click", e => {
       e.preventDefault();
