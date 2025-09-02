@@ -16,7 +16,7 @@
         "show_related_products": true
       }
     },
-    "cart_drawer_G7LVAn": {
+    "cart_drawer_X3VnTR": {
       "type": "cart-drawer",
       "name": "Cart Drawer",
       "settings": {
@@ -34,6 +34,6 @@
   },
   "order": [
     "main",
-    "cart_drawer_G7LVAn"
+    "cart_drawer_X3VnTR"
   ]
 }
