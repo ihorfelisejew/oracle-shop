@@ -16,7 +16,13 @@
     "catalog_page_QxTV4b": {
       "type": "catalog-page",
       "name": "Custom Collection",
-      "settings": {}
+      "settings": {
+        "newsletter_show": true,
+        "newsletter_image": "shopify://shop_images/main_newsletter-image.png",
+        "newsletter_title": "Newsletter",
+        "newsletter_desc": "Sign up for exclusive deals and early access to new products.",
+        "newsletter_button_text": "Subscribe"
+      }
     }
   },
   "order": [
