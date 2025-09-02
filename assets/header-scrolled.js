@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartButton = header.querySelector(".cart__button");
   const cartWrapper = document.getElementById("cart-wrapper");
   if (cartButton && cartWrapper) {
-    document.addEventListener("click", function (e) {
+    cartWrapper.addEventListener("click", e => {
       if (e.target.closest(".cart-drawer__close")) {
         cartWrapper.classList.remove("open");
       }
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const response = await fetch(`/?sections=cart-drawer&sections_url=true`);
         const sections = await response.json();
         if (sections["cart-drawer"]) {
-          // Створюємо тимчасовий контейнер для витягання тільки #cart-drawer
+          // Тимчасовий контейнер для витягання тільки #cart-drawer
           const tempDiv = document.createElement("div");
           tempDiv.innerHTML = sections["cart-drawer"];
           const newCartDrawer = tempDiv.querySelector("#cart-drawer");
@@ -153,13 +153,13 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error loading cart drawer:", err);
       }
     });
-  }
 
-  /*------Закриття кошика при кліку поза ним (за потреби)------*/
-  document.addEventListener("click", e => {
-    if (cartWrapper.classList.contains("open") && !cartWrapper.contains(e.target) && !cartButton.contains(e.target)) {
-      cartWrapper.classList.remove("open");
-    }
-  });
+    // Закриття корзини при кліку поза нею
+    document.addEventListener("click", e => {
+      if (!cartWrapper.contains(e.target) && !cartButton.contains(e.target)) {
+        cartWrapper.classList.remove("open");
+      }
+    });
+  }
 });
 //# sourceMappingURL=header-scrolled.js.map
