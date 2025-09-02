@@ -122,5 +122,20 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
+  const cartButton = header.querySelector(".cart__button");
+  const cartWrapper = document.querySelector(".cart-wrapper");
+  if (cartButton && cartWrapper) {
+    cartButton.addEventListener("click", e => {
+      e.preventDefault();
+      cartWrapper.classList.add("open");
+    });
+  }
+
+  /*------Закриття кошика при кліку поза ним (за потреби)------*/
+  document.addEventListener("click", e => {
+    if (cartWrapper.classList.contains("open") && !cartWrapper.contains(e.target) && !cartButton.contains(e.target)) {
+      cartWrapper.classList.remove("open");
+    }
+  });
 });
 //# sourceMappingURL=header-scrolled.js.map
