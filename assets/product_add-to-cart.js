@@ -40,7 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Замінюємо контент корзини
         const cartWrapper = document.querySelector(".cart-wrapper");
         if (sections[sectionId]) {
-          cartWrapper.innerHTML = sections[sectionId];
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = sections[sectionId];
+          const newCartDrawer = tempDiv.querySelector("#cart-drawer");
+          cartWrapper.innerHTML = "";
+          cartWrapper.appendChild(newCartDrawer);
           cartWrapper.classList.add("open");
         }
       } catch (error) {
