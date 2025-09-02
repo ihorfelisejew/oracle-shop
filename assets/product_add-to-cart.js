@@ -16,26 +16,37 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const addToCartBtn = document.getElementById("add-to-cart");
   if (addToCartBtn) {
-    addToCartBtn.addEventListener("click", function () {
+    addToCartBtn.addEventListener("click", async function () {
       const variantId = document.getElementById("product-variant")?.value || "{{ product.selected_or_first_available_variant.id }}";
-      const quantity = document.getElementById("quantity").value;
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: parseInt(quantity)
-        })
-      }).then(response => response.json()).then(data => {
-        fetch("/cart.js").then(response => response.json()).then(cart => {
-          document.querySelector(".cart-wrapper").classList.add("open");
-        });
-      }).catch(error => {
+      const quantity = parseInt(document.getElementById("quantity").value) || 1;
+      try {
+        // Додаємо товар до корзини
+        await fetch("/cart/add.js", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity
+          })
+        }).then(res => res.json());
+
+        // Оновлюємо секцію кошика через Shopify Sections API
+        const sectionId = "cart-drawer"; // ID секції з {% section 'cart-drawer' %}
+        const response = await fetch(`/?sections=${sectionId}&sections_url=true`);
+        const sections = await response.json();
+
+        // Замінюємо контент корзини
+        const cartWrapper = document.querySelector(".cart-wrapper");
+        if (sections[sectionId]) {
+          cartWrapper.innerHTML = sections[sectionId];
+          cartWrapper.classList.add("open");
+        }
+      } catch (error) {
         console.error("Error:", error);
         alert("Error adding product to cart");
-      });
+      }
     });
   }
 });
