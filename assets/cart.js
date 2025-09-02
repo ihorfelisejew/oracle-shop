@@ -35,14 +35,11 @@ async function updateCart(line, quantity) {
     const sectionId = "cart-drawer";
     const response = await fetch(`/?sections=${sectionId}&sections_url=true`);
     const sections = await response.json();
-    const cartWrapper = document.querySelector(".cart-wrapper");
+    const cartWrapper = document.getElementById("cart-wrapper"); // шукаємо за id
     if (sections[sectionId]) {
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = sections[sectionId];
-      const newCartDrawer = tempDiv.querySelector("#cart-drawer");
-      cartWrapper.innerHTML = "";
-      cartWrapper.appendChild(newCartDrawer);
+      cartWrapper.innerHTML = sections[sectionId];
       cartWrapper.classList.add("open");
+      const newCartDrawer = cartWrapper.querySelector("#cart-drawer");
       const newItemCount = newCartDrawer.querySelector(".cart__title")?.textContent.match(/\((\d+)\)/)?.[1] || 0;
       const cartButton = document.querySelector(".cart__button");
       cartButton.querySelector(".count").textContent = `(${newItemCount})`;
