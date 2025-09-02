@@ -1,6 +1,6 @@
 <div id="cart-drawer" class="cart-drawer">
   <div class="cart-drawer__header">
-    <h2>Cart ({{ cart.item_count }})</h2>
+    <h2>{{ section.settings.title }} ({{ cart.item_count }})</h2>
     <button type="button" class="cart-drawer__close">&times;</button>
   </div>
 
@@ -12,7 +12,7 @@
             <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.product.title }}">
           </a>
           {% if item.product.tags contains 'New' %}
-            <span class="badge">New</span>
+            <span class="badge">{{ section.settings.badge_text }}</span>
           {% endif %}
         </div>
 
@@ -31,37 +31,109 @@
           {% endif %}
 
           <div class="cart-item__qty">
-            <button type="button" class="qty-btn minus" data-line="{{ forloop.index }}">-</button>
-            <input type="number" value="{{ item.quantity }}" min="1" data-line="{{ forloop.index }}">
-            <button type="button" class="qty-btn plus" data-line="{{ forloop.index }}">+</button>
+            <button
+              type="button"
+              class="qty-btn minus"
+              data-line="{{ forloop.index }}">-</button>
+            <input
+              type="number"
+              value="{{ item.quantity }}"
+              min="1"
+              data-line="{{ forloop.index }}">
+            <button
+              type="button"
+              class="qty-btn plus"
+              data-line="{{ forloop.index }}">+</button>
           </div>
 
           {% if item.quantity >= item.variant.inventory_quantity %}
-            <p class="cart-item__error">Can't add more; it's already at the max!</p>
+            <p class="cart-item__error">{{ section.settings.max_error_text }}</p>
           {% endif %}
         </div>
 
-        <button type="button" class="cart-item__remove" data-line="{{ forloop.index }}">&times;</button>
+        <button
+          type="button"
+          class="cart-item__remove"
+          data-line="{{ forloop.index }}">&times;</button>
       </div>
     {% endfor %}
   </div>
 
   <div class="cart-drawer__footer">
     <div class="cart-subtotal">
-      <span>Subtotal:</span>
+      <span>{{ section.settings.subtotal_label }}</span>
       <span>{{ cart.total_price | money }}</span>
     </div>
 
     <label class="terms">
-      <input type="checkbox" id="terms" required>
-      Please check this box to agree to our 
-      <a href="/policies/terms-of-service" target="_blank">terms and conditions</a>
+      <input
+        type="checkbox"
+        id="terms"
+        required>
+      {{ section.settings.terms_label }}
+      <a href="{{ section.settings.terms_link }}" target="_blank">{{ section.settings.terms_link_text }}</a>
     </label>
 
     <form action="/cart" method="post">
-      <button type="submit" class="btn-checkout">Checkout</button>
+      <button type="submit" class="btn-checkout">{{ section.settings.checkout_label }}</button>
     </form>
 
-    <p class="tax-note">Taxes and shipping calculated at checkout</p>
+    <p class="tax-note">{{ section.settings.tax_note }}</p>
   </div>
 </div>
+
+{% schema %}
+  {
+    "name": "Cart Drawer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Cart title",
+        "default": "Cart"
+      },
+      {
+        "type": "text",
+        "id": "badge_text",
+        "label": "Badge text for new products",
+        "default": "New"
+      },
+      {
+        "type": "text",
+        "id": "max_error_text",
+        "label": "Max quantity error message",
+        "default": "Can't add more; it's already at the max!"
+      },
+      {
+        "type": "text",
+        "id": "subtotal_label",
+        "label": "Subtotal label",
+        "default": "Subtotal:"
+      }, {
+        "type": "text",
+        "id": "terms_label",
+        "label": "Terms checkbox label",
+        "default": "Please check this box to agree to our"
+      }, {
+        "type": "url",
+        "id": "terms_link",
+        "label": "Terms link"
+      }, {
+        "type": "text",
+        "id": "terms_link_text",
+        "label": "Terms link text",
+        "default": "terms and conditions"
+      }, {
+        "type": "text",
+        "id": "checkout_label",
+        "label": "Checkout button label",
+        "default": "Checkout"
+      }, {
+        "type": "text",
+        "id": "tax_note",
+        "label": "Taxes note",
+        "default": "Taxes and shipping calculated at checkout"
+      }
+    ]
+  }
+{% endschema %}
