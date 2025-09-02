@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       }).then(response => response.json()).then(data => {
         fetch("/cart.js").then(response => response.json()).then(cart => {
-          document.getElementById("cart-drawer").classList.add("open");
+          document.querySelector(".cart-wrapper").classList.add("open");
         });
       }).catch(error => {
         console.error("Error:", error);
