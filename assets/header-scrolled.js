@@ -125,6 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartButton = header.querySelector(".cart__button");
   const cartWrapper = document.getElementById("cart-wrapper");
   if (cartButton && cartWrapper) {
+    if (e.target.closest(".cart-drawer__close")) {
+      cartWrapper.classList.remove("open");
+    }
     cartButton.addEventListener("click", async e => {
       e.preventDefault();
       try {
