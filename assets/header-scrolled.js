@@ -122,44 +122,5 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-  const cartButton = header.querySelector(".cart__button");
-  const cartWrapper = document.getElementById("cart-wrapper");
-  if (cartButton && cartWrapper) {
-    cartWrapper.addEventListener("click", e => {
-      if (e.target.closest(".cart-drawer__close")) {
-        cartWrapper.classList.remove("open");
-      }
-    });
-    cartButton.addEventListener("click", async e => {
-      e.preventDefault();
-      try {
-        const response = await fetch(`/?sections=cart-drawer&sections_url=true`);
-        const sections = await response.json();
-        if (sections["cart-drawer"]) {
-          // Тимчасовий контейнер для витягання тільки #cart-drawer
-          const tempDiv = document.createElement("div");
-          tempDiv.innerHTML = sections["cart-drawer"];
-          const newCartDrawer = tempDiv.querySelector("#cart-drawer");
-          if (newCartDrawer) {
-            cartWrapper.innerHTML = "";
-            cartWrapper.appendChild(newCartDrawer);
-            cartWrapper.classList.add("open");
-
-            // Ініціалізація кнопок +, -, remove
-            initCartButtons(cartWrapper);
-          }
-        }
-      } catch (err) {
-        console.error("Error loading cart drawer:", err);
-      }
-    });
-
-    // Закриття корзини при кліку поза нею
-    document.addEventListener("click", e => {
-      if (!cartWrapper.contains(e.target) && !cartButton.contains(e.target)) {
-        cartWrapper.classList.remove("open");
-      }
-    });
-  }
 });
 //# sourceMappingURL=header-scrolled.js.map
