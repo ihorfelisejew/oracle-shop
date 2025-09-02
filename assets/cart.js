@@ -33,16 +33,28 @@ async function updateCart(line, quantity) {
       })
     }).then(res => res.json());
     const sectionId = "cart-drawer";
-    const response = await fetch(`/?sections=${sectionId}&sections_url=true`);
-    const sections = await response.json();
-    const cartWrapper = document.getElementById("cart-wrapper"); // шукаємо за id
-    if (sections[sectionId]) {
-      cartWrapper.innerHTML = sections[sectionId];
-      cartWrapper.classList.add("open");
-      const newCartDrawer = cartWrapper.querySelector("#cart-drawer");
-      const newItemCount = newCartDrawer.querySelector(".cart__title")?.textContent.match(/\((\d+)\)/)?.[1] || 0;
-      const cartButton = document.querySelector(".cart__button");
-      cartButton.querySelector(".count").textContent = `(${newItemCount})`;
+    try {
+      const response = await fetch(`/?sections=${sectionId}&sections_url=true`);
+      const sections = await response.json();
+      if (sections[sectionId]) {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = sections[sectionId];
+        const newCartDrawer = tempDiv.querySelector("#cart-drawer");
+        if (newCartDrawer) {
+          const cartWrapper = document.getElementById("cart-wrapper");
+          cartWrapper.innerHTML = "";
+          cartWrapper.appendChild(newCartDrawer);
+          cartWrapper.classList.add("open");
+          const newItemCount = newCartDrawer.querySelector(".cart__title")?.textContent.match(/\((\d+)\)/)?.[1] || 0;
+          const cartButton = document.querySelector(".cart__button");
+          if (cartButton) {
+            const countEl = cartButton.querySelector(".count");
+            if (countEl) countEl.textContent = `(${newItemCount})`;
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error updating cart drawer:", error);
     }
   } catch (error) {
     console.error("Error updating cart:", error);

@@ -128,51 +128,25 @@ document.addEventListener("DOMContentLoaded", function () {
     cartButton.addEventListener("click", async e => {
       e.preventDefault();
       try {
-        const response = await fetch(`/?sections=cart-drawer`);
+        const response = await fetch(`/?sections=cart-drawer&sections_url=true`);
         const sections = await response.json();
         if (sections["cart-drawer"]) {
-          cartWrapper.innerHTML = sections["cart-drawer"];
-          cartWrapper.classList.add("open");
+          // Створюємо тимчасовий контейнер для витягання тільки #cart-drawer
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = sections["cart-drawer"];
+          const newCartDrawer = tempDiv.querySelector("#cart-drawer");
+          if (newCartDrawer) {
+            cartWrapper.innerHTML = "";
+            cartWrapper.appendChild(newCartDrawer);
+            cartWrapper.classList.add("open");
 
-          // Повторно додаємо eventListener-и для кнопок +/- та remove
-          initCartButtons(cartWrapper);
+            // Ініціалізація кнопок +, -, remove
+            initCartButtons(cartWrapper);
+          }
         }
       } catch (err) {
-        console.error(err);
+        console.error("Error loading cart drawer:", err);
       }
-    });
-  }
-  function initCartButtons(wrapper) {
-    wrapper.querySelectorAll(".qty-btn.minus").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const input = btn.parentElement.querySelector("input");
-        let value = parseInt(input.value) || 1;
-        if (value > 1) input.value = value - 1;
-      });
-    });
-    wrapper.querySelectorAll(".qty-btn.plus").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const input = btn.parentElement.querySelector("input");
-        let value = parseInt(input.value) || 1;
-        input.value = value + 1;
-      });
-    });
-    wrapper.querySelectorAll(".cart-item__remove").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const line = btn.dataset.line;
-        await fetch(`/cart/change.js`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            line,
-            quantity: 0
-          })
-        });
-        // Оновити Drawer після видалення
-        cartButton.click();
-      });
     });
   }
 
