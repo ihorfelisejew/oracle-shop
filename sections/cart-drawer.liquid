@@ -61,10 +61,6 @@
                 class="qty-btn plus"
                 data-line="{{ forloop.index }}">+</button>
             </div>
-
-            {% if item.quantity >= item.variant.inventory_quantity %}
-              <p class="cart-item__error">{{ section.settings.max_error_text }}</p>
-            {% endif %}
           </div>
 
           <button
