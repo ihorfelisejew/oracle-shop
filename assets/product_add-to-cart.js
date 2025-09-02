@@ -47,9 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
           cartWrapper.appendChild(newCartDrawer);
           cartWrapper.classList.add("open");
           const newItemCount = newCartDrawer.querySelector(".cart__title")?.textContent.match(/\((\d+)\)/)?.[1] || 0;
-          document.querySelectorAll(".cart__button").forEach(btn => {
-            btn.textContent = `(${newItemCount})`;
-          });
+          const cartButton = document.querySelector(".cart__button");
+          cartButton.querySelector('.count').textContent = `(${newItemCount})`;
         }
       } catch (error) {
         console.error("Error:", error);
