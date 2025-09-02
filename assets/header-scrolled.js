@@ -125,9 +125,54 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartButton = header.querySelector(".cart__button");
   const cartWrapper = document.getElementById("cart-wrapper");
   if (cartButton && cartWrapper) {
-    cartButton.addEventListener("click", e => {
+    cartButton.addEventListener("click", async e => {
       e.preventDefault();
-      cartWrapper.classList.add("open");
+      try {
+        const response = await fetch(`/?sections=cart-drawer`);
+        const sections = await response.json();
+        if (sections["cart-drawer"]) {
+          cartWrapper.innerHTML = sections["cart-drawer"];
+          cartWrapper.classList.add("open");
+
+          // Повторно додаємо eventListener-и для кнопок +/- та remove
+          initCartButtons(cartWrapper);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  }
+  function initCartButtons(wrapper) {
+    wrapper.querySelectorAll(".qty-btn.minus").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = btn.parentElement.querySelector("input");
+        let value = parseInt(input.value) || 1;
+        if (value > 1) input.value = value - 1;
+      });
+    });
+    wrapper.querySelectorAll(".qty-btn.plus").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = btn.parentElement.querySelector("input");
+        let value = parseInt(input.value) || 1;
+        input.value = value + 1;
+      });
+    });
+    wrapper.querySelectorAll(".cart-item__remove").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const line = btn.dataset.line;
+        await fetch(`/cart/change.js`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            line,
+            quantity: 0
+          })
+        });
+        // Оновити Drawer після видалення
+        cartButton.click();
+      });
     });
   }
 
