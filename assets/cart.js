@@ -16,9 +16,6 @@ document.addEventListener("click", function (e) {
     const line = e.target.closest(".cart-item__remove").dataset.line;
     updateCart(line, 0);
   }
-  if (e.target.closest(".cart-drawer__close")) {
-    cartWrapper.classList.remove("open");
-  }
 });
 async function updateCart(line, quantity) {
   try {
