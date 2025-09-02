@@ -11,29 +11,8 @@
   "sections": {
     "main": {
       "type": "product-page",
-      "settings": {
-        "show_share_buttons": true,
-        "show_related_products": true
-      }
-    },
-    "cart_drawer_X3VnTR": {
-      "type": "cart-drawer",
-      "name": "Cart Drawer",
-      "settings": {
-        "title": "Cart",
-        "badge_text": "New",
-        "max_error_text": "Can't add more; it's already at the max!",
-        "subtotal_label": "Subtotal:",
-        "terms_label": "Please check this box to agree to our",
-        "terms_link": "",
-        "terms_link_text": "terms and conditions",
-        "checkout_label": "Checkout",
-        "tax_note": "Taxes and shipping calculated at checkout"
-      }
+      "settings": {}
     }
   },
-  "order": [
-    "main",
-    "cart_drawer_X3VnTR"
-  ]
+  "order": ["main"]
 }

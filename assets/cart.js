@@ -1,17 +1,23 @@
 document.addEventListener("click", function (e) {
+  const cartWrapper = document.querySelector(".cart-wrapper");
   if (e.target.classList.contains("qty-btn")) {
     const line = e.target.dataset.line;
     const input = document.querySelector(`input[data-line="${line}"]`);
     let quantity = parseInt(input.value);
     if (e.target.classList.contains("plus")) {
       quantity++;
-    } else if (e.target.classList.contains("minus") && quantity > 1) {
+    } else if (e.target.classList.contains("minus")) {
       quantity--;
+      if (quantity < 1) quantity = 0;
     }
     updateCart(line, quantity);
   }
-  if (e.target.classList.contains("cart-item__remove")) {
-    updateCart(e.target.dataset.line, 0);
+  if (e.target.closest(".cart-item__remove")) {
+    const line = e.target.closest(".cart-item__remove").dataset.line;
+    updateCart(line, 0);
+  }
+  if (e.target.closest(".cart-drawer__close")) {
+    cartWrapper.classList.remove("open");
   }
 });
 async function updateCart(line, quantity) {
