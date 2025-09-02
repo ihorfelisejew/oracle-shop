@@ -1,0 +1,67 @@
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-drawer__header">
+    <h2>Cart ({{ cart.item_count }})</h2>
+    <button type="button" class="cart-drawer__close">&times;</button>
+  </div>
+
+  <div class="cart-drawer__items">
+    {% for item in cart.items %}
+      <div class="cart-item" data-line="{{ forloop.index }}">
+        <div class="cart-item__image">
+          <a href="{{ item.url }}">
+            <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.product.title }}">
+          </a>
+          {% if item.product.tags contains 'New' %}
+            <span class="badge">New</span>
+          {% endif %}
+        </div>
+
+        <div class="cart-item__info">
+          <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+          <p class="cart-item__price">
+            {{ item.final_line_price | money }}
+            {% if item.original_price > item.final_price %}
+              <span class="old-price">{{ item.original_price | money }}</span>
+              <span class="discount">-{{ item.discount_allocation.amount | money }}</span>
+            {% endif %}
+          </p>
+
+          {% if item.variant.title != 'Default Title' %}
+            <p class="cart-item__variant">{{ item.variant.title }}</p>
+          {% endif %}
+
+          <div class="cart-item__qty">
+            <button type="button" class="qty-btn minus" data-line="{{ forloop.index }}">-</button>
+            <input type="number" value="{{ item.quantity }}" min="1" data-line="{{ forloop.index }}">
+            <button type="button" class="qty-btn plus" data-line="{{ forloop.index }}">+</button>
+          </div>
+
+          {% if item.quantity >= item.variant.inventory_quantity %}
+            <p class="cart-item__error">Can't add more; it's already at the max!</p>
+          {% endif %}
+        </div>
+
+        <button type="button" class="cart-item__remove" data-line="{{ forloop.index }}">&times;</button>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="cart-drawer__footer">
+    <div class="cart-subtotal">
+      <span>Subtotal:</span>
+      <span>{{ cart.total_price | money }}</span>
+    </div>
+
+    <label class="terms">
+      <input type="checkbox" id="terms" required>
+      Please check this box to agree to our 
+      <a href="/policies/terms-of-service" target="_blank">terms and conditions</a>
+    </label>
+
+    <form action="/cart" method="post">
+      <button type="submit" class="btn-checkout">Checkout</button>
+    </form>
+
+    <p class="tax-note">Taxes and shipping calculated at checkout</p>
+  </div>
+</div>
